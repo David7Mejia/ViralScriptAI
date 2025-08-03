@@ -28,7 +28,7 @@ const TikTokAnalyzer =() =>{
     console.log("Current URL:", url);
   }, [url])
 
-  const handleAnalyze = async (): Promise<void> => {
+  const handleAnalyze = async (tiktokUrl: string): Promise<void> => {
     if (!url) return;
     setIsAnalyzing(true);
     try {
@@ -37,13 +37,15 @@ const TikTokAnalyzer =() =>{
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url: tiktokUrl }),
       });
       const data = await response.json();
+      console.log("this is data", data)
       if (response.ok) {
         // Expecting transcript and analysis in response
-        setTranscript(data.transcript || "");
-        setAnalysis(data.analysis || null);
+        // setTranscript(data.transcript || "");
+        // setAnalysis(data.analysis || null);
+      console.log('this is the response', response)
       } else {
         // Handle error
         setTranscript("");
@@ -103,7 +105,7 @@ const TikTokAnalyzer =() =>{
           <CardContent>
             <div className="flex space-x-4">
               <Input type="url" placeholder="https://www.tiktok.com/@username/video/..." value={url} onChange={handleUrlChange} className="flex-1" aria-label="TikTok video URL" />
-              <Button onClick={handleAnalyze} disabled={!url || isAnalyzing} className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600" type="button">
+              <Button onClick={() =>handleAnalyze(url)} disabled={!url || isAnalyzing} className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600" type="button">
                 {isAnalyzing ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
