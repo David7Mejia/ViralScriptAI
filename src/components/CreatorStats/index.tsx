@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import { Users, Heart, Play, CheckCircle } from "lucide-react";
 import { MetricItem } from "@/types/analysis";
@@ -47,10 +48,10 @@ const CreatorStats = ({ authorMeta, formatNumber }: CreatorStatsProps) => {
               </div>
             </section>
             <section id="creator-metrics" className="max-w-300">
-              <div className="grid  max-w-100 grid-cols-2 p-3 gap-3 md:grid-cols-4 mb-6">
+              <div className="grid  max-w-fit grid-cols-2 p-3 gap-3 md:grid-cols-4 mb-6">
                 {authorMeta &&
                   metricItems.map((item: MetricItem, index) => (
-                    <div className={`bg-red-300 w-fit rounded-lg text-center`}>
+                    <div className={`bg-red-300 p-2 w-fit`}>
                       <div className={`flex items-center justify-center space-x-1 text-${item.color} mb-1`}>
                         <item.icon className="w-4 h-4" />
                         <span className="text-xs font-medium">{item.label}</span>

@@ -123,6 +123,13 @@
 
 @layer components {
   .creator-metrics {
-   @apply bg-blue-500 text-white rounded-lg px-4 py-2;
+    @apply bg-blue-500 text-white rounded-lg px-4 py-2;
+  }
+  .dropdown {
+    @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-center items-end border-[1px];
+  }
+
+  .dropdown_link {
+    @apply text-base text-gray-700 hover:text-gray-500 font-medium;
   }
 }

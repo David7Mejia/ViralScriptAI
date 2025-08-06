@@ -13,7 +13,7 @@ import type { ApifyData } from "../../types/apify";
 import hormoziJson from "../../app/hormozi-json.json";
 import Link from "next/link";
 
-export default function TikTokAnalyzer() {
+const DashboardComponent = () => {
   const [url, setUrl] = useState<string>("");
   const [transcript, setTranscript] = useState<string>("");
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -75,17 +75,17 @@ export default function TikTokAnalyzer() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="mt-6 min-h-screen bg-black">
       {/* Header */}
       <div className="bg-black border-b border-gray-200">
         <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-30">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-3 w-full">
+            {/* <div className="flex items-center space-x-3 w-full">
               <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center">
                 <Play className="w-4 h-4 text-white" />
               </div>
               <h1 className="text-xl font-semibold text-white">Content Analyzer</h1>
-            </div>
+            </div> */}
             <div className="flex w-full p-0  gap-4 ">
               <Input type="url" placeholder="https://www.tiktok.com/@username/video/..." value={url} onChange={handleUrlChange} className="flex-1 text-white" aria-label="TikTok video URL" />
               <Button onClick={handleAnalyze} disabled={!url || isAnalyzing} className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600" type="button">
@@ -183,4 +183,6 @@ export default function TikTokAnalyzer() {
       </div>
     </div>
   );
-}
+};
+
+export default DashboardComponent;
