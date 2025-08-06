@@ -2,15 +2,15 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
-import VideoInfo from "../components/VideoInfo";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Badge } from "../ui/badge";
+import VideoInfo from "../VideoInfo";
 import { Play, ChevronDown, ChevronRight, Eye, Zap, MessageSquare, BookOpen, MousePointer, CheckCircle, Loader2 } from "lucide-react";
-import type { AnalysisResult, AnalysisItem } from "../types/analysis";
-import type { ApifyData } from "../types/apify";
-import hormoziJson from "./hormozi-json.json";
+import type { AnalysisResult, AnalysisItem } from "../../types/analysis";
+import type { ApifyData } from "../../types/apify";
+import hormoziJson from "../../app/hormozi-json.json";
 import Link from "next/link";
 
 export default function TikTokAnalyzer() {

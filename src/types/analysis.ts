@@ -1,3 +1,5 @@
+import React from "react";
+
 export type AnalysisResult = {
   visualElements: string;
   hook: string;
@@ -12,4 +14,11 @@ export type AnalysisItem = {
   title: string;
   icon: React.ElementType;
   color: string;
+};
+
+export type MetricItem = {
+  icon: React.ElementType;
+  color: string;
+  metric: number;
+  label: string;
 };

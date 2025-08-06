@@ -1,0 +1,235 @@
+[
+  {
+    "id": "7533702695488703758",
+    "text": "How I negotiate ",
+    "textLanguage": "en",
+    "createTime": 1754085840,
+    "createTimeISO": "2025-08-01T22:04:00.000Z",
+    "locationCreated": "US",
+    "isAd": false,
+    "authorMeta": {
+      "id": "6910214721136952325",
+      "name": "ahormozi",
+      "profileUrl": "https://www.tiktok.com/@ahormozi",
+      "nickName": "Alex Hormozi",
+      "verified": true,
+      "signature": "My next book $100M Money Models is here\nRegister (free)👇",
+      "bioLink": null,
+      "originalAvatarUrl": "https://p16-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/4ff51569a2e5191c7e0f6533b5c60817~tplv-tiktokx-cropcenter:720:720.jpeg?dr=9640&refresh_token=71eaff62&x-expires=1754348400&x-signature=FkwuLKRLSDCnF7XZyhxM5gKD3V0%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=useast5",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4ff51569a2e5191c7e0f6533b5c60817~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=e4f88fd2&x-expires=1754607600&x-signature=xsN0Vjzdln%2FTijT15oIiFh4PIz0%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=maliva",
+      "privateAccount": false,
+      "roomId": "",
+      "ttSeller": false,
+      "following": 3,
+      "friends": 0,
+      "fans": 1300000,
+      "heart": 26700000,
+      "video": 3831,
+      "digg": 681
+    },
+    "musicMeta": {
+      "musicName": "original sound - Alex Hormozi",
+      "musicAuthor": "Alex Hormozi",
+      "musicOriginal": false,
+      "playUrl": "https://v16m.tiktokcdn-us.com/d17aa32d90aee4b4639af6801bbff918/688ef5e8/video/tos/useast5/tos-useast5-v-27dcd7-tx/oIFzKANiEpBf6tCoFwAo2EAREBP0YzBskutBiA/?a=1233&bti=ODszNWYuMDE6&ch=0&cr=0&dr=0&er=0&lr=default&cd=0%7C0%7C0%7C0&br=250&bt=125&ds=5&ft=GSDrKInz7ThZ9XkKXq8Zmo&mime_type=audio_mpeg&qs=13&rc=M202am05cnFrNTMzZzU8NEBpM202am05cnFrNTMzZzU8NEBoaV80MmRjYTNhLS1kMS9zYSNoaV80MmRjYTNhLS1kMS9zcw%3D%3D&vvpl=1&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+      "coverMediumUrl": "https://p19-pu-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/4ff51569a2e5191c7e0f6533b5c60817~tplv-tiktokx-cropcenter:200:200.jpeg?dr=9584&t=4d5b0474&ps=933b5bde&shp=08d74b56&shcp=81f88b70&idc=useast5",
+      "originalCoverMediumUrl": "https://p19-pu-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/4ff51569a2e5191c7e0f6533b5c60817~tplv-tiktokx-cropcenter:200:200.jpeg?dr=9584&t=4d5b0474&ps=933b5bde&shp=08d74b56&shcp=81f88b70&idc=useast5",
+      "musicId": "7533702809721129783"
+    },
+    "webVideoUrl": "https://www.tiktok.com/@ahormozi/video/7533702695488703758",
+    "mediaUrls": ["https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/video-ahormozi-20250801220400-7533702695488703758"],
+    "videoMeta": {
+      "height": 1024,
+      "width": 576,
+      "duration": 31,
+      "coverUrl": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/cover-ahormozi-20250801220400-7533702695488703758",
+      "originalCoverUrl": "https://p16-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oQWzIdCRHAeQpSjAFIZteBqANRoGGLf2ikZF2I~tplv-tiktokx-origin.image?dr=9636&x-expires=1754348400&x-signature=D%2Fx6T3iN3BQCi7TrsKZ3SY2C8ZM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5",
+      "definition": "540p",
+      "format": "mp4",
+      "subtitleLinks": [
+        {
+          "language": "hrv-HR",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-hrv-HR",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/27c287cf3a782a365c82d5c85a9aaa4c/68914488/video/tos/useast5/tos-useast5-v-0068-tx/6a14bac7b7bf4d0ea2ecbd6b8972aa01/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "spa-ES",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-spa-ES",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/45b33b2037c7b0953158b1af18d24f7f/68914488/video/tos/useast5/tos-useast5-v-0068-tx/ac08c37a4d794a7e8029c7c3e7320811/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "por-PT",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-por-PT",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/402b91d07c6f17894f45e8b11e39fd35/68914488/video/tos/useast5/tos-useast5-v-0068-tx/2c17fcc43128435cbf1087a4ab3193b3/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "eng-US",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-eng-US",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/be1fc650e4c751c4ed89f4e5ef9b8ca1/68914488/video/tos/useast5/tos-useast5-v-0068-tx/5c0d7404ea9a490ba15e13cefc00707c/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "ASR",
+          "sourceUnabbreviated": "automatic speech recognition",
+          "version": "1:big_caption"
+        },
+        {
+          "language": "ron-RO",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-ron-RO",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/29f4eaa2b3cb57f5af972aa2e01b8616/68914488/video/tos/useast5/tos-useast5-v-0068-tx/bf0dee46959946679f4e2cea43863e1e/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "kor-KR",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-kor-KR",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/ac9b73a4d1c5af7951ebf730c69d0622/68914488/video/tos/useast5/tos-useast5-v-0068-tx/d9f58afca4834cefa81696693dddde34/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "nld-NL",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-nld-NL",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/41016f0544d67e462f864bf8e9db3b0b/68914488/video/tos/useast5/tos-useast5-v-0068-tx/e52497ee52f149b881ea18f5a8b8069b/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "ara-SA",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-ara-SA",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/d455a3821bb748f355c7ee02a7328e00/68914488/video/tos/useast5/tos-useast5-v-0068-tx/f2261674d3b74642b6c147ca2c98fa10/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "ell-GR",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-ell-GR",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/b0bca5e91af524f6d1372655609eb0de/68914488/video/tos/useast5/tos-useast5-v-0068-tx/62a3bdd5ca1d4028a87e6aeae5496f00/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "tur-TR",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-tur-TR",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/39ab3eef9456b25a56ef6feac6eb0b6d/68914488/video/tos/useast5/tos-useast5-v-0068-tx/30c39a46bbbf409faf1bb06706591576/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "jpn-JP",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-jpn-JP",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/e6781c0d640650e588c54c3a72cdac80/68914488/video/tos/useast5/tos-useast5-v-0068-tx/bb260df897bd409cb9b2ff4e0b11542d/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "bul-BG",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-bul-BG",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/b3c978e79e5c226b142ede65033ba0d2/68914488/video/tos/useast5/tos-useast5-v-0068-tx/a632b68d680d493d9f41853766aa0ddb/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "fra-FR",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-fra-FR",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/bc6dfd1f298052209cefe5b1203763df/68914488/video/tos/useast5/tos-useast5-v-0068-tx/472b1089a1ad44879632ad1b0e32439e/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "swe-SE",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-swe-SE",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/52d54f2026b077bab0a5fc35347171d8/68914488/video/tos/useast5/tos-useast5-v-0068-tx/2b6b3942c428449eafd4f2c0cfe91cdc/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "cmn-Hans-CN",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-cmn-Hans-CN",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/990a2a17484a3b85e94c5a7656044dbd/68914488/video/tos/useast5/tos-useast5-v-0068-tx/93acad81bf204bc6a61232284f01e6eb/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "vie-VN",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-vie-VN",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/2f6f2d99b33333201d0f3c4806c72247/68914488/video/tos/useast5/tos-useast5-v-0068-tx/685f8546288b48e491711e917b3e3a4f/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "deu-DE",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-deu-DE",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/7f489da500209c2fc9936b351c55ed05/68914488/video/tos/useast5/tos-useast5-v-0068-tx/50bd0406cbdd4c229126127c59f80028/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "ita-IT",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-ita-IT",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/be9b5d7eb7676d4dc6a78cd870564a58/68914488/video/tos/useast5/tos-useast5-v-0068-tx/e611410933d44d21ac54bec36182f8db/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "ind-ID",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-ind-ID",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/aba13abe3a8f76623f441b22bcafb9b2/68914488/video/tos/useast5/tos-useast5-v-0068-tx/392d28a552e24b6380baea4ae9bc8df1/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "rus-RU",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-rus-RU",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/28faa2d71854561976d273f4de681762/68914488/video/tos/useast5/tos-useast5-v-0068-tx/7913ff67f1a14422bdb398c78ff0cc51/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        },
+        {
+          "language": "heb-IL",
+          "downloadLink": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/subtitle-ahormozi-20250801220400-7533702695488703758-heb-IL",
+          "tiktokLink": "https://v16m-webapp.tiktokcdn-us.com/ea0a72d07f1dd4f6af099d74820b25fa/68914488/video/tos/useast5/tos-useast5-v-0068-tx/f802841a143c4dd3b9447d2d75ee1d2e/?a=1988&bti=ODszNWYuMDE6&ch=0&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C&br=2022&bt=1011&cs=0&ds=3&ft=4KLMeMzm8Zmo0QO4HI4jVFPldpWrKsd.&mime_type=video_mp4&qs=13&rc=M29mcHk5cmxrNTMzZzczNEBpM29mcHk5cmxrNTMzZzczNEAtbWNpMmQ0YTNhLS1kMS9zYSMtbWNpMmQ0YTNhLS1kMS9zcw%3D%3D&l=20250802233817EE106B493E5BCE5A2C69&btag=e00048000",
+          "source": "MT",
+          "sourceUnabbreviated": "machine translation",
+          "version": "4"
+        }
+      ],
+      "downloadAddr": "https://api.apify.com/v2/key-value-stores/hKjwOT23qWcPxTl5H/records/video-ahormozi-20250801220400-7533702695488703758"
+    },
+    "diggCount": 739,
+    "shareCount": 15,
+    "playCount": 10600,
+    "collectCount": 119,
+    "commentCount": 56,
+    "mentions": [],
+    "detailedMentions": [],
+    "hashtags": [],
+    "effectStickers": [],
+    "isSlideshow": false,
+    "isPinned": false,
+    "isSponsored": false,
+    "submittedVideoUrl": "https://www.tiktok.com/@ahormozi/video/7533702695488703758?lang=en"
+  }
+]
