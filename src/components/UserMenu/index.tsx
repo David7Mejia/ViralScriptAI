@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { CircleUserRound } from "lucide-react";
 
 interface UserMenuProps {
-  session?: { user?: any };
+  session?: { user?: any } | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ session }) => {

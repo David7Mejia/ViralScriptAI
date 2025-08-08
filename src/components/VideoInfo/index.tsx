@@ -5,6 +5,7 @@ import type { ApifyData } from "../../types/apify";
 import type { JSX } from "react";
 import { useState } from "react";
 import CreatorStats from "../CreatorStats";
+import { ColorMetric } from "@/types/analysis";
 
 interface VideoInfoProps {
   videoData?: ApifyData | ApifyData[] | null | undefined;
@@ -44,6 +45,13 @@ function VideoInfo({ videoData }: VideoInfoProps): JSX.Element {
     });
   };
 
+  const colorMetrics: ColorMetric[] = [
+    { icon: Heart, metric: data.diggCount || 0, label: "Likes", color: "bg-red-50", text: "text-red-600", metricColor: "text-red-700" },
+    { icon: Play, metric: data.playCount || 0, label: "Views", color: "bg-blue-50", text: "text-blue-600", metricColor: "text-blue-700" },
+    { icon: MessageCircle, metric: data.commentCount || 0, label: "Comments", color: "bg-green-50", text: "text-green-600", metricColor: "text-green-700" },
+    { icon: Share, metric: data.shareCount || 0, label: "Shares", color: "bg-purple-50", text: "text-purple-600", metricColor: "text-purple-700" },
+    { icon: Bookmark, metric: data.collectCount || 0, label: "Saves", color: "bg-orange-50", text: "text-orange-600", metricColor: "text-orange-700" },
+  ];
   const calculateEngagementRate = (): string => {
     const totalEngagements = (data.diggCount || 0) + (data.commentCount || 0) + (data.shareCount || 0);
     const rate = data.playCount ? (totalEngagements / data.playCount) * 100 : 0;
@@ -57,43 +65,31 @@ function VideoInfo({ videoData }: VideoInfoProps): JSX.Element {
 
       {/* Video Preview Card */}
       <div id="video-info-container" className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="shadow-sm bg-gray-300/10">
-          <CardHeader>
-            <CardTitle className="flex items-start justify-between">
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg mb-2">{data.text}</h3>
-                <div className="flex items-center space-x-4 text-sm text-gray-600">
-                  <div className="flex items-center space-x-1">
-                    <Clock className="w-4 h-4" />
-                    <span>{formatDuration(data?.videoMeta.duration)}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <MapPin className="w-4 h-4" />
-                    <span>{data.locationCreated}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Music className="w-4 h-4" />
-                    <span>{data.musicMeta.musicOriginal ? "Original" : "Licensed"}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">{data.musicMeta.musicName}</p>
-                      <p className="text-sm text-gray-600">by {data.musicMeta.musicAuthor}</p>
+        <div id="video-col" className="p-6 rounded-xl shadow-sm bg-gray-300/10">
+          <div className="flex items-start justify-between">
+            <div id="video-cover-container" className="glow-aura flex-1 h-full">
+              <img id="video-cover" src={data?.videoMeta?.coverUrl || "/placeholder.svg"} alt="Video cover" className="max-h-96 object-cover rounded-lg" />
+            </div>
+
+            {/* Video Metrics */}
+
+            <div className="flex-1">
+              <div className="flex flex-col max-w-30 gap-y-3 ml-auto">
+                {data?.authorMeta &&
+                  colorMetrics.map((item: ColorMetric, index) => (
+                    <div className={`${item.color} rounded-lg p-3 text-center`}>
+                      <div className={`flex items-center justify-center space-x-1 ${item.text} mb-1`}>
+                        <item.icon className="w-4 h-4" />
+                        <span className="text-xs font-medium">{item.label}</span>
+                      </div>
+                      <p className={`font-bold text-lg ${item.metricColor}`}>{formatNumber(item.metric)}</p>
                     </div>
-                    <Badge variant={data.musicMeta.musicOriginal ? "default" : "secondary"}>{data.musicMeta.musicOriginal ? "Original Sound" : "Licensed Music"}</Badge>
-                  </div>
-                  <div className="mt-4 text-xs text-gray-500">
-                    Published on {formatDate(data.createTimeISO)} • {data.videoMeta.definition} • {data.videoMeta.format.toUpperCase()}
-                  </div>
-                </div>
+                  ))}
               </div>
-              <div className="ml-4">
-                <img src={data.videoMeta.coverUrl || "/placeholder.svg"} alt="Video cover" className="w-20 h-28 object-cover rounded-lg border" />
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2 mb-4">
+            </div>
+          </div>
+          <div>
+            {/* <div className="flex flex-wrap gap-2 mb-4">
               {data.isAd && (
                 <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
                   Ad
@@ -112,52 +108,33 @@ function VideoInfo({ videoData }: VideoInfoProps): JSX.Element {
               <Badge variant="outline" className="bg-green-50 text-green-700">
                 {calculateEngagementRate()} Engagement
               </Badge>
+            </div> */}
+
+            <h3 id="video-caption" className="font-semibold text-lg my-2 text-white">
+              {data.text}
+            </h3>
+            <div className="flex items-center space-x-4 text-sm text-white">
+              <div className="flex items-center space-x-1">
+                <Clock className="w-4 h-4" />
+                <span className="text-xs">{formatDuration(data?.videoMeta.duration)}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <MapPin className="w-4 h-4" />
+                <span className="text-xs">{data.locationCreated}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-1">
+                  <Music className="w-4 h-4" />
+                  <p className="text-xs">
+                    {data.musicMeta.musicName} by {data.musicMeta.musicAuthor}
+                  </p>
+                </div>
+                {/* <Badge variant={data.musicMeta.musicOriginal ? "default" : "secondary"}>{data.musicMeta.musicOriginal ? "Original Sound" : "Licensed Music"}</Badge> */}
+              </div>
+              <div className="text-xs text-white">Posted {formatDate(data.createTimeISO)}</div>
             </div>
-
-            {/* Video Metrics */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="bg-red-50 rounded-lg p-3 text-center">
-                <div className="flex items-center justify-center space-x-1 text-red-600 mb-1">
-                  <Heart className="w-4 h-4" />
-                  <span className="text-xs font-medium">Likes</span>
-                </div>
-                <p className="font-bold text-lg text-red-700">{formatNumber(data.diggCount)}</p>
-              </div>
-
-              <div className="bg-blue-50 rounded-lg p-3 text-center">
-                <div className="flex items-center justify-center space-x-1 text-blue-600 mb-1">
-                  <Play className="w-4 h-4" />
-                  <span className="text-xs font-medium">Views</span>
-                </div>
-                <p className="font-bold text-lg text-blue-700">{formatNumber(data.playCount)}</p>
-              </div>
-
-              <div className="bg-green-50 rounded-lg p-3 text-center">
-                <div className="flex items-center justify-center space-x-1 text-green-600 mb-1">
-                  <MessageCircle className="w-4 h-4" />
-                  <span className="text-xs font-medium">Comments</span>
-                </div>
-                <p className="font-bold text-lg text-green-700">{formatNumber(data.commentCount)}</p>
-              </div>
-
-              <div className="bg-purple-50 rounded-lg p-3 text-center">
-                <div className="flex items-center justify-center space-x-1 text-purple-600 mb-1">
-                  <Share className="w-4 h-4" />
-                  <span className="text-xs font-medium">Shares</span>
-                </div>
-                <p className="font-bold text-lg text-purple-700">{formatNumber(data.shareCount)}</p>
-              </div>
-
-              <div className="bg-orange-50 rounded-lg p-3 text-center">
-                <div className="flex items-center justify-center space-x-1 text-orange-600 mb-1">
-                  <Bookmark className="w-4 h-4" />
-                  <span className="text-xs font-medium">Saves</span>
-                </div>
-                <p className="font-bold text-lg text-orange-700">{formatNumber(data.collectCount)}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         <div className="space-y-6">
           <Card className="shadow-sm">

@@ -22,3 +22,12 @@ export type MetricItem = {
   metric: number;
   label: string;
 };
+
+export type ColorMetric = {
+  icon: React.ElementType;
+  metric: number;
+  label: string;
+  color: string;
+  text: string;
+  metricColor: string;
+};

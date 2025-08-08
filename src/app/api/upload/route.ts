@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     const rawUserId = session?.user?.sub;
     const sanitizedUserId = rawUserId.replace(/[|]/g, "_");
-    console.log(rawUserId)
+    console.log(rawUserId);
     // return rawUserId;
     // Add more detailed parsing and error handling
     let requestBody;
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
         .from("videos")
         .insert([
           {
-            user_id: userId, // Add user_id from authenticated session
+            user_id: sanitizedUserId, // Add user_id from authenticated session
             data: videoItem, // Store entire JSON metadata
             video_url: videoUrlData.publicUrl, // URL to our stored copy
             thumbnail_url: storedThumbnailUrl,

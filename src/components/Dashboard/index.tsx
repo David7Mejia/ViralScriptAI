@@ -91,10 +91,10 @@ const DashboardComponent = () => {
   ];
 
   return (
-    <div className="pt-[61px] min-h-screen bg-black">
+    <div className="pt-[61px] min-h-screen bg-black w-full max-w-[1280px]">
       {/* Header */}
       <div className="sticky top-[61px] bg-black">
-        <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-30">
+        <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-0">
           <div className="flex items-center justify-between h-16">
             {/* <div className="flex items-center space-x-3 w-full">
               <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center">
@@ -122,7 +122,7 @@ const DashboardComponent = () => {
         </div>
       </div>
 
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-30 py-8 ">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-0 py-8 ">
         {/* Video Information Section - Render hormoziJson for testing, fallback to API data */}
         <div className="mb-8">
           <VideoInfo videoData={videoData || hormoziJson} />

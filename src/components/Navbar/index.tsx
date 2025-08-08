@@ -9,7 +9,7 @@ const Navbar = async() => {
   return (
     <div className="fixed top-0 w-full bg-black shadow-sm z-50">
       <div className="py-4 border-b-[1px]">
-        <div className="max-w-[1280px] mx-auto px-4">
+        <div className="max-w-[1280px] mx-auto ">
           <div className="flex items-center justify-between">
             <Logo />
             <UserMenu session={session} />

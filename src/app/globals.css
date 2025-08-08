@@ -45,7 +45,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: black;
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -131,5 +131,44 @@
 
   .dropdown_link {
     @apply text-base text-gray-700 hover:text-gray-500 font-medium;
+  }
+}
+
+#video-cover {
+  position: relative;
+  z-index: 1;
+  border: transparent 1px solid !important;
+  background: linear-gradient(#56f7ab, #69dfff), linear-gradient(90deg, #56f7ab, #69dfff 40%, #ff4edc 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 400% 400%;
+  animation: border-flow 2s ease-in-out infinite alternate;
+  /* Add a subtle box-shadow for inner glow */
+  box-shadow:  0 0 100px 4px #ff4edc;
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 100% 50%;
+    /* box-shadow: 0 0 0 40px #69dfff, 0 0 16px 4px #ff4edc66; */
+  }
+  50% {
+    background-position: 50% 50%;
+    /* box-shadow: 0 0 0 0 #ff4edc, 0 0 32px 12px #56f7ab99; */
+  }
+  100% {
+    background-position: 0% 50%;
+    /* box-shadow: 0 0 0 80px #69dfff, 0 0 0 0 #ff1bd1; */
+  }
+}
+@keyframes glow-pulse {
+  0% {
+    /* box-shadow: 0 0 10px 0 #ff4edc, 0 0 10px 0px #ff4edc; */
+  }
+  50% {
+    /* box-shadow: 0 0 10px 0 #ff4edc, 0 0 10px 0px transparent; */
+  }
+  100% {
+    /* box-shadow: 10px 0 10px 0 transparent, 8px 0 10px 0 #ff4edc; */
   }
 }

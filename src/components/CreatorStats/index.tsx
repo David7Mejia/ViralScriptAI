@@ -32,7 +32,7 @@ const CreatorStats = ({ authorMeta, formatNumber }: CreatorStatsProps) => {
       <CardHeader>
         <CardTitle className="flex items-top space-x-10">
           <div className="w-60 h-60 rounded-full overflow-hidden bg-gray-200 ">
-            <img src={authorMeta.avatar || "/placeholder.svg"} alt={authorMeta.nickName} className="w-full h-full object-cover" />
+            <img src={authorMeta?.avatar || "/placeholder.svg"} alt={authorMeta.nickName} className="w-full h-full object-cover" />
           </div>
           <div className="flex-1 flex flex-col gap-y-[10px]">
             <section id="subheading">
