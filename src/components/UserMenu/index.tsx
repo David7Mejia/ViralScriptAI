@@ -8,12 +8,12 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ session }) => {
-  const [toggleDropdown, setToggleDropdown] = useState(false);
-  const dropdownRef = useRef(null);
+  const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !(dropdownRef.current as any).contains(event.target)) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setToggleDropdown(false);
       }
     };
@@ -34,7 +34,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ session }) => {
           <div className="relative">
             <CircleUserRound className="cursor-pointer" color={"white"} strokeWidth={1.25} absoluteStrokeWidth onClick={() => setToggleDropdown(prev => !prev)} />
             {toggleDropdown && (
-              <div className="dropdown">
+              <div className="dropdown" ref={dropdownRef}>
                 <Link href="/my-rooms" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
                   My Rooms
                 </Link>

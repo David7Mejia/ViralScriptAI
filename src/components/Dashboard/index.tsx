@@ -41,12 +41,28 @@ const DashboardComponent = () => {
       const { response: apifyData } = await response.json();
       if (response.ok && apifyData) {
         setVideoData(apifyData);
-        // Optionally, fetch transcript/analysis from another endpoint
-        const uploadToSupabase = await fetch("/api/upload", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ videoData: apifyData }),
-        });
+
+        // Log data being sent to upload endpoint
+        console.log("Sending to upload API:", JSON.stringify(apifyData));
+
+        try {
+          // Optionally, fetch transcript/analysis from another endpoint
+          const uploadToSupabase = await fetch("/api/upload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(apifyData),
+          });
+
+          if (!uploadToSupabase.ok) {
+            const errorData = await uploadToSupabase.json();
+            console.error("Upload to Supabase failed:", uploadToSupabase.status, errorData);
+          } else {
+            const uploadResponse = await uploadToSupabase.json();
+            console.log("Upload success:", uploadResponse);
+          }
+        } catch (uploadError) {
+          console.error("Error uploading to Supabase:", uploadError);
+        }
         // const { transcript, analysis } = await analysisResponse.json();
         // setTranscript(transcript);
         // setAnalysis(analysis);
@@ -75,10 +91,10 @@ const DashboardComponent = () => {
   ];
 
   return (
-    <div className="mt-6 min-h-screen bg-black">
+    <div className="pt-[61px] min-h-screen bg-black">
       {/* Header */}
-      <div className="bg-black border-b border-gray-200">
-        <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-30">
+      <div className="sticky top-[61px] bg-black">
+        <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-30">
           <div className="flex items-center justify-between h-16">
             {/* <div className="flex items-center space-x-3 w-full">
               <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center">
@@ -88,7 +104,7 @@ const DashboardComponent = () => {
             </div> */}
             <div className="flex w-full p-0  gap-4 ">
               <Input type="url" placeholder="https://www.tiktok.com/@username/video/..." value={url} onChange={handleUrlChange} className="flex-1 text-white" aria-label="TikTok video URL" />
-              <Button onClick={handleAnalyze} disabled={!url || isAnalyzing} className="bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600" type="button">
+              <Button onClick={handleAnalyze} disabled={!url || isAnalyzing} className="" type="button">
                 {isAnalyzing ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />

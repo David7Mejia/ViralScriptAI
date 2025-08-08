@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { ApifyClient } from "apify-client";
 import { ApifyData } from "../../../types/apify";
+import { auth0 } from "../../../lib/auth0";
 
 const client = new ApifyClient({
   token: process.env.APIFY_TOKEN,
@@ -31,6 +32,7 @@ type TikTokApiResponse = {
   videoPlays: number | null;
   videoSaves: number | null;
   videoComments: number | null;
+  thumbnailUrl: string | null;
 };
 
 // interface ApifyData {
@@ -66,6 +68,12 @@ type TikTokApiResponse = {
 // }
 
 export async function POST(request: NextRequest) {
+  const session = await auth0.getSession();
+  
+  if (!session || !session.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const { url }: { url: string } = body;
@@ -125,6 +133,7 @@ export async function POST(request: NextRequest) {
       videoPlays: typeof data.playCount === "number" ? data.playCount : null,
       videoSaves: typeof data.collectCount === "number" ? data.collectCount : null,
       videoComments: typeof data.commentCount === "number" ? data.commentCount : null,
+      thumbnailUrl: data.videoMeta?.coverUrl || null,
     };
 
     return NextResponse.json({ response }, { status: 200 });

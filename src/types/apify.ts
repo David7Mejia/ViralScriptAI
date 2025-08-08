@@ -2,6 +2,7 @@ export interface ApifyData {
   videoMeta?: {
     duration?: number;
     subtitleLinks?: Array<{ language: string; downloadLink: string }>;
+    coverUrl?: string;
   };
   musicMeta?: {
     playUrl?: string;

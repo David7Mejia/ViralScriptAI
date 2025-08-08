@@ -12,7 +12,7 @@ const DashboardContainer = async (props: Props) => {
     redirect("/");
   }
   return (
-    <div>
+    <div className="">
       <DashboardComponent />
     </div>
   );

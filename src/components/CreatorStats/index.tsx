@@ -34,7 +34,7 @@ const CreatorStats = ({ authorMeta, formatNumber }: CreatorStatsProps) => {
           <div className="w-60 h-60 rounded-full overflow-hidden bg-gray-200 ">
             <img src={authorMeta.avatar || "/placeholder.svg"} alt={authorMeta.nickName} className="w-full h-full object-cover" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 flex flex-col gap-y-[10px]">
             <section id="subheading">
               <div className="flex items-center space-x-2 mb-1">
                 <p className="text-white font-bold text-xl">@{authorMeta.name}</p>
@@ -47,16 +47,16 @@ const CreatorStats = ({ authorMeta, formatNumber }: CreatorStatsProps) => {
                 </a>
               </div>
             </section>
-            <section id="creator-metrics" className="max-w-300">
-              <div className="grid  max-w-fit grid-cols-2 p-3 gap-3 md:grid-cols-4 mb-6">
+            <section id="creator-metrics" className="w-full">
+              <div className="flex flex-wrap gap-x-8 gap-y-4">
                 {authorMeta &&
                   metricItems.map((item: MetricItem, index) => (
-                    <div className={`bg-red-300 p-2 w-fit`}>
-                      <div className={`flex items-center justify-center space-x-1 text-${item.color} mb-1`}>
+                    <div key={`metric-${index}`} className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         <item.icon className="w-4 h-4" />
-                        <span className="text-xs font-medium">{item.label}</span>
+                        <span className="font-medium">{item.label}</span>
                       </div>
-                      <p className={`font-bold text-lg text-${item.color}`}>{formatNumber(item.metric)}</p>
+                      <p className="font-bold">{formatNumber(item.metric)}</p>
                     </div>
                   ))}
               </div>
