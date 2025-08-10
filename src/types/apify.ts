@@ -1,4 +1,5 @@
 export interface ApifyData {
+  id?: string;
   videoMeta?: {
     duration?: number;
     subtitleLinks?: Array<{ language: string; downloadLink: string }>;
@@ -21,6 +22,7 @@ export interface ApifyData {
     fans?: number;
     heart?: number;
     video?: number;
+    id?: string;
   };
   webVideoUrl?: string;
   mediaUrls?: string[];

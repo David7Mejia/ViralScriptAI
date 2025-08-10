@@ -34,38 +34,44 @@ export async function POST(request: NextRequest) {
     const rawUserId = session?.user?.sub;
     const sanitizedUserId = rawUserId.replace(/[|]/g, "_");
     console.log(rawUserId);
-    // return rawUserId;
-    // Add more detailed parsing and error handling
-    let requestBody;
+
+    // --- TEST JSON HANDLING ---
+    // let requestBody;
+    // try {
+    //   requestBody = await request.json();
+    // } catch (parseError) {
+    //   console.error("Failed to parse request JSON:", parseError);
+    //   return NextResponse.json({ error: "Invalid JSON in request body" }, { status: 400 });
+    // }
+    // const videoData = requestBody;
+    // console.log("video DATA**********", videoData);
+    // if (!videoData) {
+    //   console.error("Missing videoData in request");
+    //   return NextResponse.json({ error: "Video data is required" }, { status: 400 });
+    // }
+    // if (!videoData || (typeof videoData !== "object" && !Array.isArray(videoData))) {
+    //   console.error("Invalid videoData format:", videoData);
+    //   return NextResponse.json({ error: "Invalid video data format" }, { status: 400 });
+    // }
+    // const videoItem = Array.isArray(videoData) ? videoData[0] : videoData;
+    // if (!videoItem) {
+    //   console.error("No valid video item found in data");
+    //   return NextResponse.json({ error: "No valid video item found in data" }, { status: 400 });
+    // }
+
+    // --- APIFY API CALL RESPONSE ---
+    let videoItem;
     try {
-      requestBody = await request.json();
-      // console.log("Request body********************************:", JSON.stringify(requestBody));
+      videoItem = await request.json();
     } catch (parseError) {
       console.error("Failed to parse request JSON:", parseError);
       return NextResponse.json({ error: "Invalid JSON in request body" }, { status: 400 });
     }
-    // console.log(requestBody);
-    const videoData = requestBody;
-
-    if (!videoData) {
-      console.error("Missing videoData in request");
-      return NextResponse.json({ error: "Video data is required" }, { status: 400 });
-    }
-
-    // Check if videoData is valid before proceeding
-    if (!videoData || (typeof videoData !== "object" && !Array.isArray(videoData))) {
-      console.error("Invalid videoData format:", videoData);
-      return NextResponse.json({ error: "Invalid video data format" }, { status: 400 });
-    }
-
-    // Handle both array and direct object from hormozi-json.json
-    const videoItem = Array.isArray(videoData) ? videoData[0] : videoData;
-
     if (!videoItem) {
       console.error("No valid video item found in data");
       return NextResponse.json({ error: "No valid video item found in data" }, { status: 400 });
     }
-
+    console.log("VIDEO ITEM", videoItem);
     // Ensure we have a video URL to download
     const videoUrl = videoItem?.videoUrl || videoItem?.downloadUrls?.[0] || null;
 
@@ -73,9 +79,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No video URL found in data" }, { status: 400 });
     }
 
-    const videoId = Date.now().toString();
-    const videoFileName = `${sanitizedUserId}/${videoId}/video.mp4`;
-    const thumbnailFileName = `${sanitizedUserId}/${videoId}/thumbnail.jpg`;
+    const creatorId = videoItem?.creatorId || "unknown_creator";
+    const videoId = videoItem?.id || Date.now().toString();
+
+    const videoFileName = `${sanitizedUserId}/${creatorId}/${videoId}/video.mp4`;
+    const thumbnailFileName = `${sanitizedUserId}/${creatorId}/${videoId}/thumbnail.jpg`;
+    const avatarFileName = `${sanitizedUserId}/${creatorId}/avatar.jpg`; // for avatar
 
     try {
       // Download & Upload video
@@ -91,8 +100,8 @@ export async function POST(request: NextRequest) {
       }
 
       // Get public video URL
-      const { data: videoUrlData } = supabase.storage.from("videos").getPublicUrl(videoFileName);
-
+      const { data: videoUrlData } = await supabase.storage.from("videos").getPublicUrl(videoFileName);
+      console.log("Video URL Data****************:", videoUrlData);
       // Download and upload thumbnail
       const thumbnailUrl = videoItem.thumbnailUrl;
       let storedThumbnailUrl = null;
@@ -105,11 +114,29 @@ export async function POST(request: NextRequest) {
             cacheControl: "3600",
           });
 
-          const { data: thumbUrlData } = supabase.storage.from("videos").getPublicUrl(thumbnailFileName);
+          const { data: thumbUrlData } = await supabase.storage.from("videos").getPublicUrl(thumbnailFileName);
           storedThumbnailUrl = thumbUrlData.publicUrl;
         } catch (error) {
           console.error("Error uploading thumbnail:", error);
           // Continue even if thumbnail upload fails
+        }
+      }
+
+      // Download and upload avatar
+      const avatarUrl = videoItem?.authorMeta?.avatar;
+      let storedAvatarUrl = null;
+      if (avatarUrl) {
+        try {
+          const avatarBuffer = await downloadFile(avatarUrl);
+          await supabase.storage.from("videos").upload(avatarFileName, avatarBuffer, {
+            contentType: "image/jpeg",
+            cacheControl: "3600",
+            upsert: true,
+          });
+          const { data: avatarUrlData } = await supabase.storage.from("videos").getPublicUrl(avatarFileName);
+          storedAvatarUrl = avatarUrlData.publicUrl;
+        } catch (error) {
+          console.error("Error uploading avatar:", error);
         }
       }
 
@@ -119,8 +146,10 @@ export async function POST(request: NextRequest) {
         .insert([
           {
             user_id: sanitizedUserId, // Add user_id from authenticated session
+            videoId: videoItem?.id,
+            avatarId: videoItem?.creatorId,
             data: videoItem, // Store entire JSON metadata
-            video_url: videoUrlData.publicUrl, // URL to our stored copy
+            video_url: videoUrlData?.publicUrl, // URL to our stored copy
             thumbnail_url: storedThumbnailUrl,
             title: videoItem.text || "Untitled",
             source_platform: "TikTok",
@@ -137,7 +166,7 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        videoId: data[0].id,
+        videoId: data?.[0]?.id ?? videoItem?.id,
         videoUrl: videoUrlData.publicUrl,
         message: "Video uploaded successfully",
       });
@@ -150,3 +179,5 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: `Internal Server Error ${e}` }, { status: 500 });
   }
 }
+
+

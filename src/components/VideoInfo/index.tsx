@@ -68,7 +68,7 @@ function VideoInfo({ videoData }: VideoInfoProps): JSX.Element {
         <div id="video-col" className="p-6 rounded-xl shadow-sm bg-gray-300/10">
           <div className="flex items-start justify-between">
             <div id="video-cover-container" className="glow-aura flex-1 h-full">
-              <img id="video-cover" src={data?.videoMeta?.coverUrl || "/placeholder.svg"} alt="Video cover" className="max-h-96 object-cover rounded-lg" />
+              <img id="video-cover" src={data?.videoMeta?.coverUrl || "/placeholder.svg"} alt="Video cover" className="max-w-mdobject-cover rounded-lg" />
             </div>
 
             {/* Video Metrics */}
@@ -77,7 +77,7 @@ function VideoInfo({ videoData }: VideoInfoProps): JSX.Element {
               <div className="flex flex-col max-w-30 gap-y-3 ml-auto">
                 {data?.authorMeta &&
                   colorMetrics.map((item: ColorMetric, index) => (
-                    <div className={`${item.color} rounded-lg p-3 text-center`}>
+                    <div key={index} className={`${item.color} rounded-lg p-3 text-center`}>
                       <div className={`flex items-center justify-center space-x-1 ${item.text} mb-1`}>
                         <item.icon className="w-4 h-4" />
                         <span className="text-xs font-medium">{item.label}</span>

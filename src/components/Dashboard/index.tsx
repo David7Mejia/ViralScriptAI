@@ -11,6 +11,7 @@ import { Play, ChevronDown, ChevronRight, Eye, Zap, MessageSquare, BookOpen, Mou
 import type { AnalysisResult, AnalysisItem } from "../../types/analysis";
 import type { ApifyData } from "../../types/apify";
 import hormoziJson from "../../app/hormozi-json.json";
+
 import Link from "next/link";
 
 const DashboardComponent = () => {
@@ -63,6 +64,23 @@ const DashboardComponent = () => {
         } catch (uploadError) {
           console.error("Error uploading to Supabase:", uploadError);
         }
+        try {
+          const analysis = await fetch("/api/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              publicUrl: "https://<proj>.supabase.co/storage/v1/object/public/videos/foo.mp4",
+              prompt: "Give me a scene-by-scene summary with timestamps.",
+            }),
+          });
+
+          const analysisResponse = await analysis.json();
+          if (!analysis.ok) {
+            throw new Error(analysisResponse.error || "Failed to analyze video");
+          }
+          setAnalysis(analysisResponse);
+          console.log("Analysis response:", analysisResponse);
+        } catch (e) {}
         // const { transcript, analysis } = await analysisResponse.json();
         // setTranscript(transcript);
         // setAnalysis(analysis);
@@ -85,15 +103,15 @@ const DashboardComponent = () => {
     { key: "visualElements", title: "Visual Elements", icon: Eye, color: "bg-blue-50 text-blue-700" },
     { key: "hook", title: "Hook Analysis", icon: Zap, color: "bg-yellow-50 text-yellow-700" },
     { key: "context", title: "Context & Timing", icon: MessageSquare, color: "bg-green-50 text-green-700" },
-    { key: "storytelling", title: "Storytelling", icon: BookOpen, color: "bg-purple-50 text-purple-700" },
+    // { key: "storytelling", title: "Storytelling", icon: BookOpen, color: "bg-purple-50 text-purple-700" },
     { key: "cta", title: "Call to Action", icon: MousePointer, color: "bg-orange-50 text-orange-700" },
-    { key: "factCheck", title: "Fact Check", icon: CheckCircle, color: "bg-emerald-50 text-emerald-700" },
+    // { key: "factCheck", title: "Fact Check", icon: CheckCircle, color: "bg-emerald-50 text-emerald-700" },
   ];
 
   return (
-    <div className="pt-[61px] min-h-screen bg-black w-full max-w-[1280px]">
+    <div className="pt-[60.8px] min-h-screen bg-black w-full max-w-[1280px]">
       {/* Header */}
-      <div className="sticky top-[61px] bg-black">
+      <div className="sticky top-[60px] bg-black z-50">
         <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-0">
           <div className="flex items-center justify-between h-16">
             {/* <div className="flex items-center space-x-3 w-full">
@@ -103,7 +121,7 @@ const DashboardComponent = () => {
               <h1 className="text-xl font-semibold text-white">Content Analyzer</h1>
             </div> */}
             <div className="flex w-full p-0  gap-4 ">
-              <Input type="url" placeholder="https://www.tiktok.com/@username/video/..." value={url} onChange={handleUrlChange} className="flex-1 text-white" aria-label="TikTok video URL" />
+              <Input type="url" placeholder="https://www.tiktok.com/@username/video/..." value={url} onChange={handleUrlChange} className="flex-1 text-white z-40" aria-label="TikTok video URL" />
               <Button onClick={handleAnalyze} disabled={!url || isAnalyzing} className="" type="button">
                 {isAnalyzing ? (
                   <>
@@ -132,7 +150,7 @@ const DashboardComponent = () => {
           {/* Analysis Results */}
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">Analysis Results</h2>
+              <h2 className="text-lg font-semibold text-white">Analysis Results</h2>
               {analysis && (
                 <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
                   Analysis Complete

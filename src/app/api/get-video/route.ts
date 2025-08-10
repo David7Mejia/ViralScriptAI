@@ -8,6 +8,8 @@ const client = new ApifyClient({
 });
 
 type TikTokApiResponse = {
+  videoId: string | null;
+  creatorId: string | null;
   videoUrl: string | null;
   audioUrl: string | null;
   caption: string | null;
@@ -69,7 +71,7 @@ type TikTokApiResponse = {
 
 export async function POST(request: NextRequest) {
   const session = await auth0.getSession();
-  
+  console.log("Session:", session);
   if (!session || !session.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -107,6 +109,8 @@ export async function POST(request: NextRequest) {
 
     const data = items[0] as ApifyData;
     const response: TikTokApiResponse = {
+      videoId: data?.id ?? null,
+      creatorId: data?.authorMeta?.id ?? null,
       videoUrl: data.mediaUrls?.[0] ?? null,
       audioUrl: data.musicMeta?.playUrl ?? null,
       caption: typeof data.text === "string" ? data.text : null,

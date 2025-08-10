@@ -136,39 +136,39 @@
 
 #video-cover {
   position: relative;
-  z-index: 1;
-  border: transparent 1px solid !important;
+  border: transparent 2px solid !important;
   background: linear-gradient(#56f7ab, #69dfff), linear-gradient(90deg, #56f7ab, #69dfff 40%, #ff4edc 100%);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   background-size: 400% 400%;
-  animation: border-flow 2s ease-in-out infinite alternate;
+  animation: glow-pulse 3s ease-in-out infinite alternate;
   /* Add a subtle box-shadow for inner glow */
-  box-shadow:  0 0 100px 4px #ff4edc;
+  /* box-shadow: 0 0 1px 0 rgb(107, 240, 147), 0 0 2px 0 #a5cee1; */
 }
 
-@keyframes border-flow {
+@keyframes glow-pulse {
   0% {
     background-position: 100% 50%;
-    /* box-shadow: 0 0 0 40px #69dfff, 0 0 16px 4px #ff4edc66; */
   }
   50% {
     background-position: 50% 50%;
-    /* box-shadow: 0 0 0 0 #ff4edc, 0 0 32px 12px #56f7ab99; */
   }
   100% {
     background-position: 0% 50%;
-    /* box-shadow: 0 0 0 80px #69dfff, 0 0 0 0 #ff1bd1; */
   }
 }
-@keyframes glow-pulse {
-  0% {
-    /* box-shadow: 0 0 10px 0 #ff4edc, 0 0 10px 0px #ff4edc; */
-  }
-  50% {
-    /* box-shadow: 0 0 10px 0 #ff4edc, 0 0 10px 0px transparent; */
-  }
-  100% {
-    /* box-shadow: 10px 0 10px 0 transparent, 8px 0 10px 0 #ff4edc; */
-  }
+#navbar-border-container {
+  position: relative;
+  z-index: 1;
+}
+
+#navbar-border-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #56f7ab, #69dfff 40%, #ff4edc 100%);
+  pointer-events: none;
 }
