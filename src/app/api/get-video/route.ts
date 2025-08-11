@@ -1,77 +1,14 @@
 import { NextResponse, NextRequest } from "next/server";
 import { ApifyClient } from "apify-client";
-import { ApifyData } from "../../../types/apify";
+import { ApifyData, TikTokApiResponse } from "../../../types/apify";
 import { auth0 } from "../../../lib/auth0";
 
 const client = new ApifyClient({
   token: process.env.APIFY_TOKEN,
 });
 
-type TikTokApiResponse = {
-  videoId: string | null;
-  creatorId: string | null;
-  videoUrl: string | null;
-  audioUrl: string | null;
-  caption: string | null;
-  hashtags: string[];
-  duration: number | null;
-  transcriptSource: string | null;
-  author: string | null;
-  avatar: string | null;
-  webVideoUrl: string | null;
-  isAd: boolean | null;
-  createdAt: string | null;
-  username: string | null;
-  name: string | null;
-  bioDescription: string | null;
-  followers: number | null;
-  likes: number | null;
-  videoCount: number | null;
-  platformUrl: string | null;
-  downloadUrls: string[] | null;
-  videoLikes: number | null;
-  videoShares: number | null;
-  videoPlays: number | null;
-  videoSaves: number | null;
-  videoComments: number | null;
-  thumbnailUrl: string | null;
-};
-
-// interface ApifyData {
-//   videoMeta?: {
-//     duration?: number;
-//     subtitleLinks?: Array<{ language: string; downloadLink: string }>;
-//   };
-//   musicMeta?: {
-//     playUrl?: string;
-//   };
-//   text?: string;
-//   hashtags?: string[];
-//   isAd?: boolean;
-//   createTimeISO?: string;
-//   authorMeta?: {
-//     name?: string;
-//     avatar?: string;
-//     profileUrl?: string;
-//     nickName?: string;
-//     signtaure?: string;
-//     biolink?: string;
-//     fans?: number;
-//     heart?: number;
-//     video?: number;
-//   };
-//   webVideoUrl?: string;
-//   mediaUrls?: string[];
-//   diggCount?: number;
-//   shareCount?: number;
-//   playCount?: number;
-//   collectCount?: number;
-//   commentCount?: number;
-// }
-
 export async function POST(request: NextRequest) {
   const session = await auth0.getSession();
-  console.log("Session:", session);
   if (!session || !session.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }

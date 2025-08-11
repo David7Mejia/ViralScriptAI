@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
     }
 
     const creatorId = videoItem?.creatorId || "unknown_creator";
-    const videoId = videoItem?.id || Date.now().toString();
+    const videoId = videoItem?.videoId || Date.now().toString();
 
     const videoFileName = `${sanitizedUserId}/${creatorId}/${videoId}/video.mp4`;
     const thumbnailFileName = `${sanitizedUserId}/${creatorId}/${videoId}/thumbnail.jpg`;
@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
       }
 
       // Download and upload avatar
-      const avatarUrl = videoItem?.authorMeta?.avatar;
+      const avatarUrl = videoItem?.avatar;
       let storedAvatarUrl = null;
       if (avatarUrl) {
         try {
@@ -146,12 +146,12 @@ export async function POST(request: NextRequest) {
         .insert([
           {
             user_id: sanitizedUserId, // Add user_id from authenticated session
-            videoId: videoItem?.id,
+            videoId: videoItem?.videoId,
             avatarId: videoItem?.creatorId,
             data: videoItem, // Store entire JSON metadata
             video_url: videoUrlData?.publicUrl, // URL to our stored copy
             thumbnail_url: storedThumbnailUrl,
-            title: videoItem.text || "Untitled",
+            title: videoItem.caption || videoItem.text || "Untitled",
             source_platform: "TikTok",
             source_url: videoItem.webVideoUrl || "",
             created_at: new Date().toISOString(),
@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        videoId: data?.[0]?.id ?? videoItem?.id,
+        videoId: data?.[0]?.id ?? videoItem?.videoId,
         videoUrl: videoUrlData.publicUrl,
         message: "Video uploaded successfully",
       });
@@ -179,5 +179,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: `Internal Server Error ${e}` }, { status: 500 });
   }
 }
-
-

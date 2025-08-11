@@ -54,8 +54,8 @@ export default function VideoAnalysis({ videoId }: VideoAnalysisProps) {
       {error && <div className="p-4 text-sm text-red-700 bg-red-100 rounded-md">{error}</div>}
 
       {analysis && (
-        <div className="p-4 border rounded-md bg-gray-50">
-          <h4 className="mb-2 text-md font-medium">Analysis Results</h4>
+        <div className="p-4 border rounded-md bg-white">
+          <h4 className="mb-2 text-md font-medium text-gray-700">Analysis Results</h4>
           <div className="prose prose-sm max-w-none">
             {analysis.split("\n").map((line, i) => (
               <p key={i} className={line.trim().length === 0 ? "my-4" : ""}>

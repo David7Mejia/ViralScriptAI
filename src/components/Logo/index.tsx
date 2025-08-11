@@ -6,7 +6,7 @@ const Logo = () => {
       className="
     flex justify-center items-center"
     >
-      <p className="font-bold text-xl text-white tracking-wide">ViralScript.ai</p>
+      <p className="font-bold text-xl text-gray-700 tracking-wide">ViralScript.ai</p>
     </div>
   );
 };

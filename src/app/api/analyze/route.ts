@@ -29,14 +29,14 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ error: "publicUrl is required" }), { status: 400 });
     }
 
-    // Guard: < 20 MB
+    // Enforce < 20 MB
     const head = await fetch(publicUrl, { method: "HEAD" });
     const len = Number(head.headers.get("content-length") ?? "0");
     if (len > 20 * 1024 * 1024) {
       return new Response(JSON.stringify({ error: "File is > 20MB. Use Files API for large videos." }), { status: 400 });
     }
 
-    // Fetch bytes
+    // Download bytes server-side
     const res = await fetch(publicUrl);
     if (!res.ok) {
       return new Response(JSON.stringify({ error: "Failed to download video from URL" }), { status: 400 });
@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
 
     const mediaType = head.headers.get("content-type") || inferMediaTypeFromPath(publicUrl) || "video/mp4";
 
-    // Streamed response
-    const { textStream } = await streamText({
+    // Stream with AI SDK v5
+    const result = streamText({
       model: google("gemini-2.5-flash"),
       messages: [
         {
@@ -56,7 +56,6 @@ export async function POST(req: NextRequest) {
             {
               type: "text",
               text:
-                // Return JSON so your UI can map fields 1:1
                 prompt ??
                 `Analyze this short video and return STRICT JSON only with this shape:
 {
@@ -72,8 +71,8 @@ Do not include markdown fences or extra commentary.`,
       ],
     });
 
-    // This returns a proper streaming response in Next.js Route Handlers
-    return textStream.toTextStreamResponse();
+    // ✅ v5: no deprecated helpers
+    return result.toUIMessageStreamResponse();
   } catch (err: any) {
     console.error(err);
     return new Response(JSON.stringify({ error: err?.message ?? "Unknown error" }), { status: 500 });
