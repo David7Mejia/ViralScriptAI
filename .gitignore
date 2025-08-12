@@ -23,7 +23,9 @@
 # misc
 .DS_Store
 *.pem
-
+/src/app/gemini.js
+src/app/gemini.js
+public/
 # debug
 npm-debug.log*
 yarn-debug.log*

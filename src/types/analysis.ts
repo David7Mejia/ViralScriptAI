@@ -7,6 +7,9 @@ export type AnalysisResult = {
   storytelling: string;
   cta: string;
   factCheck: string;
+  engagement_factors?: string[];
+  sentiment?: string;
+  tone?: string;
 };
 
 export type AnalysisItem = {

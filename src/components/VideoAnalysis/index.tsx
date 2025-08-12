@@ -6,7 +6,7 @@ interface VideoAnalysisProps {
   videoId: string;
 }
 
-export default function VideoAnalysis({ videoId }: VideoAnalysisProps) {
+const VideoAnalysis = ({ videoId }: VideoAnalysisProps) => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -67,4 +67,6 @@ export default function VideoAnalysis({ videoId }: VideoAnalysisProps) {
       )}
     </div>
   );
-}
+};
+
+export default VideoAnalysis;

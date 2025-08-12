@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
     }
     console.log("VIDEO ITEM", videoItem);
     // Ensure we have a video URL to download
-    const videoUrl = videoItem?.videoUrl || videoItem?.downloadUrls?.[0] || null;
+    const videoUrl = videoItem?.videoUrl || videoItem?.downloadUrls || null;
 
     if (!videoUrl) {
       return NextResponse.json({ error: "No video URL found in data" }, { status: 400 });

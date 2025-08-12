@@ -11,6 +11,8 @@
   "dependencies": {
     "@ai-sdk/google": "^2.0.2",
     "@auth0/nextjs-auth0": "^4.9.0",
+    "@google/genai": "^1.13.0",
+    "@google/generative-ai": "^0.24.1",
     "@radix-ui/react-slot": "^1.2.3",
     "@supabase/supabase-js": "^2.53.0",
     "ai": "^5.0.5",

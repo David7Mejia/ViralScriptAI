@@ -6,7 +6,7 @@ import { streamText } from "ai";
 
 const sb_url = process.env.SUPABASE_URL!;
 const sb_secret_key = process.env.SUPABASE_SECRET_KEY!;
-const geminiApiKey = process.env.GEMINI_API_KEY!;
+const geminiApiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY!;
 
 if (!sb_url || !sb_secret_key) {
   throw new Error("Supabase URL or secret key is not set in environment variables");
@@ -80,7 +80,7 @@ Focus on engagement, audience targeting, content structure, and trend alignment.
 
     // Generate a streaming response using AI SDK
     const { textStream } = streamText({
-      model: google("gemini-1.5-pro", { apiKey: geminiApiKey }),
+      model: google("gemini-2.5-flash-lite"),
       messages: combinedMessages,
     });
 

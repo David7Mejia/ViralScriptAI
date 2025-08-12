@@ -7,7 +7,7 @@ interface UserMenuProps {
   session?: { user?: any } | null;
 }
 
-const UserMenu: React.FC<UserMenuProps> = ({ session }) => {
+const UserMenu = ({ session }: UserMenuProps) => {
   const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 

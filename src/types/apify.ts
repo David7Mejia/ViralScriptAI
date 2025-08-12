@@ -26,7 +26,7 @@ export interface ApifyData {
     following?: number;
   };
   webVideoUrl?: string;
-  mediaUrls?: string[];
+  mediaUrls?: string;
   diggCount?: number;
   shareCount?: number;
   playCount?: number;
@@ -56,7 +56,7 @@ export type TikTokApiResponse = {
   likes: number | null;
   videoCount: number | null;
   platformUrl: string | null;
-  downloadUrls: string[] | null;
+  downloadUrls: string | null;
   videoLikes: number | null;
   videoShares: number | null;
   videoPlays: number | null;

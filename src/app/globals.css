@@ -137,7 +137,7 @@
 #video-cover {
   position: relative;
   border: transparent 2px solid !important;
-  background: linear-gradient(#56f7ab, #69dfff), linear-gradient(90deg, #56f7ab, #69dfff 40%, #ff4edc 100%);
+  background: linear-gradient(black, black), linear-gradient(90deg, #56f7ab, #69dfff 40%, #ff4edc 100%);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   background-size: 400% 400%;

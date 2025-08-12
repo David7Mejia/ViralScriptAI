@@ -9,7 +9,7 @@ interface TranscriptInfoProps {
   isLoading?: boolean;
 }
 
-const TranscriptInfo: React.FC<TranscriptInfoProps> = ({ transcript, isLoading }) => {
+const TranscriptInfo = ({ transcript, isLoading }: TranscriptInfoProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {

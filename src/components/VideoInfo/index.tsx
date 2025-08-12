@@ -13,9 +13,10 @@ import { format } from "date-fns";
 interface VideoInfoProps {
   videoData?: TikTokApiResponse | TikTokApiResponse[] | null | undefined;
   transcript?: string;
+  videoUrl?: string;
 }
 
-function VideoInfo({ videoData, transcript }: VideoInfoProps): JSX.Element {
+function VideoInfo({ videoData, transcript, videoUrl }: VideoInfoProps): JSX.Element {
   // If array, use first item; else use object; fallback to empty object
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -127,38 +128,70 @@ function VideoInfo({ videoData, transcript }: VideoInfoProps): JSX.Element {
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Video Player Area */}
-            <div id="video-cover" className="relative bg-black border  rounded-lg overflow-hidden aspect-[9/16] max-h-96">
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-950 flex items-center justify-center">
-                {/* Placeholder for actual video - in real implementation this would be an iframe or video element */}
-                <div className="text-center text-white">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                    <Play className="w-8 h-8 text-white ml-1" />
-                  </div>
-                  <p className="text-sm opacity-80">TikTok Video Player</p>
-                  <p className="text-xs opacity-60 mt-1">Click to play original video</p>
-                </div>
-              </div>
-              {/* Video Controls Overlay */}
-              <div className="grid grid-cols-2 h-full">
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <div className="flex items-center justify-between text-white">
-                    <div className="flex items-center space-x-3">
-                      <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2" onClick={() => setIsPlaying(!isPlaying)}>
-                        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                      </Button>
-                      <span className="text-xs">0:00 / {formatDuration(data?.duration)}</span>
+            <div id="video-cover" className="object-cover relative bg-black border rounded-lg overflow-hidden aspect-[9/16] max-h-96">
+              {videoUrl && isPlaying ? (
+                <video
+                  src={videoUrl}
+                  className="w-full h-full object-cover"
+                  controls={true}
+                  autoPlay={true}
+                  muted={isMuted}
+                  playsInline
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center cursor-pointer" onClick={() => videoUrl && setIsPlaying(true)}>
+                  {data?.thumbnailUrl ? (
+                    <>
+                      <img src={data.thumbnailUrl} alt="Video thumbnail" className="absolute inset-0 w-full h-full object-cover" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <Play className="w-8 h-8 text-white ml-1" />
+                          </div>
+                          <p className="text-sm ">TikTok Video Player</p>
+                          <p className="text-xs mt-1">{videoUrl ? "Click to play" : "Video not available"}</p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-950 flex items-center justify-center">
+                      <div className="text-center text-white">
+                        <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                          <Play className="w-8 h-8 text-white ml-1" />
+                        </div>
+                        <p className="text-sm opacity-80">TikTok Video Player</p>
+                        <p className="text-xs opacity-60 mt-1">{videoUrl ? "Click to play" : "Video not available"}</p>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2" onClick={() => setIsMuted(!isMuted)}>
-                        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                      </Button>
-                      <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2">
-                        <Maximize className="w-4 h-4" />
-                      </Button>
+                  )}
+                </div>
+              )}
+
+              {/* Video Controls Overlay - Only show if not using native controls and not playing */}
+              {!isPlaying && (
+                <div className="grid grid-cols-2 h-full">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                    <div className="flex items-center justify-between text-white">
+                      <div className="flex items-center space-x-3">
+                        <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2" onClick={() => videoUrl && setIsPlaying(!isPlaying)} disabled={!videoUrl}>
+                          <Play className="w-4 h-4" />
+                        </Button>
+                        <span className="text-xs">0:00 / {formatDuration(data?.duration)}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2" onClick={() => setIsMuted(!isMuted)}>
+                          {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                        </Button>
+                        {/* <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2">
+                          <Maximize className="w-4 h-4" />
+                        </Button> */}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
             {/* --- Metrics Row --- */}
             <div className="flex flex-wrap gap-3 mb-2">
@@ -176,7 +209,7 @@ function VideoInfo({ videoData, transcript }: VideoInfoProps): JSX.Element {
             {/* Video Description */}
             <div className="space-y-2">
               <h4 className="font-medium text-gray-800">Description</h4>
-              <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-lg">{data?.description || "No description available"}</p>
+              <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-lg">{data?.caption || "No description available"}</p>
             </div>
 
             {/* Video URL */}

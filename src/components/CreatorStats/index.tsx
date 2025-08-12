@@ -21,7 +21,7 @@ const CreatorStats = ({ videoData, formatNumber }: CreatorStatsProps) => {
   ];
 
   return (
-    <Card className="flex-1 shadow-sm text-white">
+    <Card className="flex-1 shadow-sm text-black">
       <CardHeader>
         <CardTitle className="flex items-top space-x-10">
           <div className="w-60 h-60 rounded-full overflow-hidden bg-gray-200 ">
@@ -30,7 +30,7 @@ const CreatorStats = ({ videoData, formatNumber }: CreatorStatsProps) => {
           <div className="flex-1 flex flex-col gap-y-[10px]">
             <section id="subheading">
               <div className="flex items-center space-x-2 mb-1">
-                <p className="text-white font-bold text-xl">@{videoData?.name || videoData?.username}</p>
+                <p className="text-black font-bold text-xl">@{videoData?.name || videoData?.username}</p>
                 {/* TikTokApiResponse does not have verified, so omit or add if available */}
               </div>
               <div className="flex items-center space-x-2 mb-1">
@@ -58,7 +58,7 @@ const CreatorStats = ({ videoData, formatNumber }: CreatorStatsProps) => {
             <section id="bio-description">
               {videoData?.bioDescription && (
                 <div className="">
-                  <p className="text-sm text-white whitespace-pre-line">{videoData.bioDescription}</p>
+                  <p className="text-sm text-black whitespace-pre-line">{videoData.bioDescription}</p>
                 </div>
               )}
             </section>
