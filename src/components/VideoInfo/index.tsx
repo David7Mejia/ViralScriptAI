@@ -8,7 +8,6 @@ import { useState } from "react";
 import CreatorStats from "../CreatorStats";
 import { ColorMetric } from "@/types/analysis";
 import TranscriptInfo from "../TranscriptInfo";
-import { format } from "date-fns";
 
 interface VideoInfoProps {
   videoData?: TikTokApiResponse | TikTokApiResponse[] | null | undefined;

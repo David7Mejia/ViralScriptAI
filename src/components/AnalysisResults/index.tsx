@@ -28,41 +28,6 @@ const AnalysisSection = ({ icon: Icon, title, content, color, bgColor }: Analysi
 
 const AnalysisResults = ({ analysis, isLoading }: AnalysisResultsProps) => {
   // Debug logging to see what data we're getting
-  React.useEffect(() => {
-    console.log("🔍 [AnalysisResults] Analysis data:", analysis);
-
-    if (analysis) {
-      console.log("✅ [AnalysisResults] Analysis keys:", Object.keys(analysis));
-      console.log("📊 [AnalysisResults] Content samples:");
-      if (analysis.hook) console.log("- Hook:", analysis.hook.substring(0, 50) + "...");
-      if (analysis.context) console.log("- Context:", analysis.context.substring(0, 50) + "...");
-      if (analysis.cta) console.log("- CTA:", analysis.cta.substring(0, 50) + "...");
-      if (analysis.visualElements) console.log("- Visual:", analysis.visualElements.substring(0, 50) + "...");
-      if (analysis.engagement_factors) console.log("- Factors:", analysis.engagement_factors);
-    }
-  }, [analysis]);
-
-  // Loading skeleton (simple version)
-  if (isLoading) {
-    return (
-      <Card className="shadow-sm h-full">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="h-6 w-1/2 bg-gray-200 rounded animate-pulse" />
-            <div className="h-6 w-20 bg-gray-200 rounded animate-pulse" />
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="space-y-2">
-              <div className="h-4 w-1/3 bg-gray-200 rounded animate-pulse" />
-              <div className="h-16 w-full rounded-lg bg-gray-200 animate-pulse" />
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-    );
-  }
 
   return (
     <Card className="shadow-sm h-full flex flex-col">
@@ -72,20 +37,37 @@ const AnalysisResults = ({ analysis, isLoading }: AnalysisResultsProps) => {
             <Brain className="w-5 h-5 mr-2 text-pink-500" />
             AI Content Analysis
           </CardTitle>
-          <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
-            <Star className="w-3 h-3 mr-1" />
-            Complete
-          </Badge>
+          {isLoading ? (
+            <div className="h-6 w-20 bg-gray-200 rounded animate-pulse" />
+          ) : (
+            <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
+              <Star className="w-3 h-3 mr-1" />
+              Complete
+            </Badge>
+          )}
         </div>
         <p className="text-sm text-gray-500">AI-powered insights into content structure and effectiveness</p>
       </CardHeader>
       <CardContent className="space-y-4 flex-grow">
+        {isLoading ? (
+          <>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="space-y-2">
+                <div className="h-4 w-1/3 bg-gray-200 rounded animate-pulse" />
+                <div className="h-16 w-full rounded-lg bg-gray-200 animate-pulse" />
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <AnalysisSection icon={Zap} title="Hook Analysis" content={analysis?.hook} color="border-l-yellow-500 text-yellow-500" bgColor="bg-yellow-50" />
+
+            <AnalysisSection icon={MessageSquare} title="Context & Structure" content={analysis?.context} color="border-l-blue-500 text-blue-500" bgColor="bg-blue-50" />
+
+            <AnalysisSection icon={Target} title="Call-to-Action" content={analysis?.cta} color="border-l-green-500 text-green-500" bgColor="bg-green-50" />
+          </>
+        )}
         {/* Main Analysis Sections */}
-        <AnalysisSection icon={Zap} title="Hook Analysis" content={analysis?.hook} color="border-l-yellow-500 text-yellow-500" bgColor="bg-yellow-50" />
-
-        <AnalysisSection icon={MessageSquare} title="Context & Structure" content={analysis?.context} color="border-l-blue-500 text-blue-500" bgColor="bg-blue-50" />
-
-        <AnalysisSection icon={Target} title="Call-to-Action" content={analysis?.cta} color="border-l-green-500 text-green-500" bgColor="bg-green-50" />
 
         {/* Additional Analysis Data */}
         {(analysis?.engagement_factors || analysis?.sentiment || analysis?.tone) && (
@@ -128,14 +110,6 @@ const AnalysisResults = ({ analysis, isLoading }: AnalysisResultsProps) => {
             )}
           </div>
         )}
-
-        {/* Debug information - Uncomment when needed */}
-        {/* <div className="mt-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
-          <h5 className="font-medium text-gray-800 mb-2">Debug Information</h5>
-          <pre className="text-xs overflow-auto p-2 bg-white rounded border max-h-40">
-            {JSON.stringify(analysis, null, 2)}
-          </pre>
-        </div> */}
       </CardContent>
     </Card>
   );

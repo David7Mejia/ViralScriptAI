@@ -37,8 +37,9 @@ const DashboardComponent = () => {
     if (!url) return;
     setIsAnalyzing(true);
     setStep("get-video");
+
     try {
-      // Real API call
+      // Fetch video data from /api/get-video
       const response = await fetch("/api/get-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,11 +48,46 @@ const DashboardComponent = () => {
       const { response: tiktokData } = await response.json();
       // If array, use first item; else use object
       const videoObj = Array.isArray(tiktokData) ? tiktokData[0] : tiktokData;
+
       if (response.ok && videoObj) {
         setVideoData(videoObj);
 
-        console.log("Sending to upload API:", JSON.stringify(videoObj));
+        console.log("Sending to analyze API:", JSON.stringify(videoObj));
+        try {
+          setStep("analyze");
 
+          // Fetch analysis and transcript from /api/analyze
+          const result = await fetch("/api/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              publicUrl: videoObj.videoUrl,
+              prompt: "Analyze this video and return STRICT JSON with { visualElements, hook, context, cta } and MM:SS timestamps.",
+            }),
+          });
+
+          const analysisResponse = await result.json();
+          console.log("✅ [Dashboard] Analysis response received:", analysisResponse);
+
+          if (!result.ok) {
+            console.error("❌ [Dashboard] Analysis API error:", analysisResponse);
+            setStep("error");
+            throw new Error(analysisResponse.error || "Failed to analyze video");
+          }
+
+          // Update state with analysis and transcript
+          const { analysis, transcript } = analysisResponse;
+          console.log("analysis transcript", analysis, transcript);
+          setAnalysis(analysis);
+          setTranscript(transcript);
+          setStep("complete");
+        } catch (e) {
+          console.error("Error analyzing video:", e);
+          setTranscript("");
+          setAnalysis(null);
+          setStep("error");
+        }
+        /*
         try {
           setStep("upload");
           const uploadToSupabase = await fetch("/api/upload", {
@@ -193,21 +229,24 @@ const DashboardComponent = () => {
           console.error("Error uploading to Supabase:", uploadError);
           setStep("error");
         }
-
+*/
         // (Old commented code preserved)
         // const { transcript, analysis } = await analysisResponse.json();
         // setTranscript(transcript);
         // setAnalysis(analysis);
       } else {
+        console.error("❌ [Dashboard] Failed to fetch video data:", response.statusText);
         setTranscript("");
         setAnalysis(null);
         setStep("error");
       }
     } catch (error) {
+      console.error("❌ [Dashboard] Error fetching video data:", error);
       setTranscript("");
       setAnalysis(null);
       setStep("error");
     }
+
     setIsAnalyzing(false);
   };
 
@@ -215,19 +254,10 @@ const DashboardComponent = () => {
     setUrl(e.target.value);
   };
 
-  const analysisItems: AnalysisItem[] = [
-    { key: "visualElements", title: "Visual Elements", icon: Eye, color: "bg-blue-50 text-blue-700" },
-    { key: "hook", title: "Hook Analysis", icon: Zap, color: "bg-yellow-50 text-yellow-700" },
-    { key: "context", title: "Context & Timing", icon: MessageSquare, color: "bg-green-50 text-green-700" },
-    // { key: "storytelling", title: "Storytelling", icon: BookOpen, color: "bg-purple-50 text-purple-700" },
-    { key: "cta", title: "Call to Action", icon: MousePointer, color: "bg-orange-50 text-orange-700" },
-    // { key: "factCheck", title: "Fact Check", icon: CheckCircle, color: "bg-emerald-50 text-emerald-700" },
-  ];
-
   return (
-    <div className="pt-[60.8px] px-5 min-h-screen  w-full ">
+    <div className="pt-[60.8px] px-5 min-h-screen w-full">
       {/* Header */}
-      <div className="sticky top-[60px]  z-50">
+      <div className="sticky top-[60px] z-50">
         <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-0">
           <div className="flex items-center justify-between rounded-xl px-5 bg-white h-16">
             {/* <div className="flex items-center space-x-3 w-full">
@@ -256,11 +286,11 @@ const DashboardComponent = () => {
         </div>
       </div>
 
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-0 py-8 ">
-        {/* Video Information Section - Render hormoziJson for testing, fallback to API data */}
-        <VideoInfo videoData={videoData} transcript={transcript} videoUrl={uploadResponse?.videoUrl} />
-        {/* Main Content Grid */}
-        {/* Analysis Results copmonent goes here */}
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-0 py-8">
+        {/* Video Information Section */}
+        <VideoInfo videoData={videoData} transcript={transcript} videoUrl={videoData?.videoUrl ?? undefined} />
+
+        {/* Analysis Results Section */}
         <div className="flex items-center justify-between mb-6">
           {analysis && (
             <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
