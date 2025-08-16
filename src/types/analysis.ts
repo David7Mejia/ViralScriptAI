@@ -1,4 +1,5 @@
 import React from "react";
+import { z } from "zod";
 
 export interface AnalysisResult {
   sentiment: "positive" | "neutral" | "negative"; // Sentiment is a string with specific values
@@ -36,3 +37,17 @@ export type ColorMetric = {
   text: string;
   metricColor: string;
 };
+
+export const AnalysisSchema = z.object({
+  sentiment: z.enum(["positive", "neutral", "negative"]),
+  structure: z.object({
+    hook: z.string().default(""),
+    problem: z.string().default(""),
+    story: z.string().default(""),
+    payoff: z.string().default(""),
+    cta: z.string().default(""),
+  }),
+  topics: z.array(z.string()).max(12).default([]),
+  keywords: z.array(z.string()).max(24).default([]),
+  summary: z.string().default(""),
+});

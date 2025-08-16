@@ -35,7 +35,7 @@ const UserMenu = ({ session }: UserMenuProps) => {
             <CircleUserRound className="cursor-pointer" color={"white"} strokeWidth={1.25} absoluteStrokeWidth onClick={() => setToggleDropdown(prev => !prev)} />
             {toggleDropdown && (
               <div className="dropdown" ref={dropdownRef}>
-              
+
                 <Link href="/apis" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
                   API Keys
                 </Link>

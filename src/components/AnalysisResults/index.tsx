@@ -10,12 +10,12 @@ interface AnalysisResultsProps {
 }
 interface AnalysisSectionProps {
   icon: React.ElementType;
-  title: string;
+  title?: string;
   content?: string;
-  color: string;
-  bgColor: string;
+  color?: string;
+  bgColor?: string;
 }
-const StructureSection = ({ icon: Icon, title, content, color, bgColor }) => (
+const StructureSection = ({ icon: Icon, title, content, color, bgColor }: AnalysisSectionProps) => (
   <div className={`p-4 rounded-xl ${bgColor} border border-gray-100 hover:shadow-sm transition-all duration-200`}>
     <div className="flex items-start space-x-3">
       <div className={`p-2 rounded-lg ${bgColor} border ${color.replace("text-", "border-")}`}>
@@ -29,7 +29,7 @@ const StructureSection = ({ icon: Icon, title, content, color, bgColor }) => (
   </div>
 );
 
-const SummaryCard = ({ title, content, icon: Icon, color }) => (
+const SummaryCard = ({ title, content, icon: Icon, color }: AnalysisSectionProps) => (
   <div className="bg-white p-4 rounded-xl border border-gray-100 hover:shadow-sm transition-all duration-200">
     <div className="flex items-center mb-2">
       <Icon className={`w-5 h-5 mr-2 ${color}`} />
@@ -39,9 +39,7 @@ const SummaryCard = ({ title, content, icon: Icon, color }) => (
   </div>
 );
 
-
 const AnalysisResults = ({ analysis, isLoading }: AnalysisResultsProps) => {
-
   return (
     <>
       <Card className="shadow-sm h-full flex flex-col">
