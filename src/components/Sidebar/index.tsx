@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     const loadChatList = async () => {
-      const response = await fetch(`/api/get-chats`, {
+      const response = await fetch(``, {
         method: "POST",
       });
 
@@ -31,7 +31,7 @@ const Sidebar = () => {
       </Link>
       <div className="flex-1 overflow-auto px-2 py-2 rounded-md flex flex-col gap-2">
         {chatList.map((chat, index) => (
-          <Link href={`/chat/`} className="transition-all duration-200 hover:bg-gray-500/50  text-left rounded-md py-1 px-4 cursor-pointer" key={index}>
+          <Link href={`/`} className="transition-all duration-200 hover:bg-gray-500/50  text-left rounded-md py-1 px-4 cursor-pointer" key={index}>
             {/* {chat?.title && chat?.title.length >= 20 ? `${chat.title.slice(0, 20)}...` : `${chat.title}`} */}
           </Link>
         ))}

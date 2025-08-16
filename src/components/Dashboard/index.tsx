@@ -11,7 +11,6 @@ import AnalysisResults from "../AnalysisResults";
 import { Play, ChevronDown, ChevronRight, Eye, Zap, MessageSquare, BookOpen, MousePointer, CheckCircle, Loader2 } from "lucide-react";
 import type { AnalysisResult, AnalysisItem } from "../../types/analysis";
 import type { TikTokApiResponse } from "../../types/apify";
-import hormoziJson from "../../app/hormozi-json.json";
 import { readUIMessageStream } from "ai";
 
 import Link from "next/link";
@@ -24,7 +23,6 @@ const DashboardComponent = () => {
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const [step, setStep] = useState<"get-video" | "upload" | "analyze" | "streaming" | "complete" | "error" | "idle">("idle");
-  const [uploadResponse, setUploadResponse] = useState<{ videoUrl?: string }>({});
 
   const toggleSection = (section: string): void => {
     setOpenSections(prev => ({
@@ -39,7 +37,6 @@ const DashboardComponent = () => {
     setStep("get-video");
 
     try {
-      // Fetch video data from /api/get-video
       const response = await fetch("/api/get-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -49,7 +46,7 @@ const DashboardComponent = () => {
       console.log("GET VIDEO??>>>>>>>>", response);
       // If array, use first item; else use object
       const videoObj = Array.isArray(tiktokData) ? tiktokData[0] : tiktokData;
-      console.log("video obj", videoObj, tiktokData);
+      console.log("video obj", videoObj);
       if (response.ok && videoObj) {
         setVideoData(videoObj);
 
@@ -63,24 +60,25 @@ const DashboardComponent = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               publicUrl: videoObj?.videoUrl,
-              tiktokData: videoObj,
+              tiktokData: response,
             }),
           });
 
           const analysisResponse = await result.json();
-          console.log("✅ [Dashboard] Analysis response received:", analysisResponse);
+          console.log("✅ [DashboardAnalysis response received:", analysisResponse);
 
           if (!result.ok) {
-            console.error("❌ [Dashboard] Analysis API error:", analysisResponse);
+            console.error("❌ [DashboardAnalysis API error:", analysisResponse);
             setStep("error");
             throw new Error(analysisResponse.error || "Failed to analyze video");
           }
-          // ---- STREAM HANDLING ----
+
+          /          // ---- STREAM HANDLING ----
           setStep("streaming");
           let accumulatedPartials: any[] = [];
           let accumulatedTranscript = "";
 
-          console.log("🔄 [Dashboard] Starting to receive stream from analysis endpoint...");
+          console.log("[Dashboard] Starting to receive stream from analysis endpoint...");
 
           for await (const uiMessage of readUIMessageStream({
             stream: result.body,
@@ -96,66 +94,23 @@ const DashboardComponent = () => {
             }
           }
 
-          console.log("✅ [Dashboard] Stream processing complete");
           setStep("complete");
-          {
-            /*
-
-          }
-          // const { partials, transcript } = analysisResponse;
-          // console.log("analysis transcript", partials, transcript);
-          // setAnalysis(partials);
-          // setTranscript(transcript);
-          // setStep("complete");
-
-          */
-          }
-        } catch (e) {
+tch (e) {
           console.error("Error analyzing video:", e);
           setTranscript("");
           setAnalysis(null);
           setStep("error");
         }
-        {
-          /*
+        /*
 
-          if (!uploadToSupabase.ok) {
-            const errorData = await uploadToSupabase.json();
-            console.error("Upload to Supabase failed:", uploadToSupabase.status, errorData);
-            setStep("error");
-          } else {
-            const response = await uploadToSupabase.json();
-            setUploadResponse(response);
-            console.log("Upload success:", response);
-
-            // ---- NEW: stream analysis using the publicUrl returned by /api/upload ----
-            try {
-              setStep("analyze");
-              const result = await fetch("/api/analyze", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  publicUrl: response.videoUrl,
-                  prompt: "Analyze this video and return STRICT JSON with { visualElements, hook, context, cta } and MM:SS timestamps.",
-                }),
-              });
-
-              if (!result.ok || !result.body) {
-                const analysisResponse = await result.json().catch(() => ({}));
-                console.error("Analysis API error:", analysisResponse);
-                setStep("error");
-                throw new Error(analysisResponse.error || "Failed to analyze video");
-              }
-        */
-        }
-      } else {
-        console.error("❌ [Dashboard] Failed to fetch video data:", response.statusText);
+ {
+        console.error("❌ [DashboardFailed to fetch video data:", response.statusText);
         setTranscript("");
         setAnalysis(null);
         setStep("error");
       }
     } catch (error) {
-      console.error("❌ [Dashboard] Error fetching video data:", error);
+      console.error("❌ [DashboardError fetching video data:", error);
       setTranscript("");
       setAnalysis(null);
       setStep("error");
@@ -169,17 +124,11 @@ const DashboardComponent = () => {
   };
 
   return (
-    <div className="pt-[60.8px] px-5 min-h-screen w-full">
+    <div className="pt-[60.8px] px-5 min-h-scre20n w-full">
       {/* Header */}
       <div className="sticky top-[60px] z-50">
         <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-0">
-          <div className="flex items-center justify-between rounded-xl px-5 bg-white h-16">
-            {/* <div className="flex items-center space-x-3 w-full">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center">
-                <Play className="w-4 h-4 text-white" />
-              </div>
-              <h1 className="text-xl font-semibold text-white">Content Analyzer</h1>
-            </div> */}
+          <div className="flex items-center justify-between rounded-xl px-5 bg-white h816">
             <div className="flex w-full p-0  bg-white gap-4 ">
               <Input type="url" placeholder="https://www.tiktok.com/@username/video/..." value={url} onChange={handleUrlChange} className="flex-1 text-black z-40" aria-label="TikTok video URL" />
               <Button onClick={handleAnalyze} disabled={!url || isAnalyzing} className="text-white" type="button">
@@ -193,16 +142,13 @@ const DashboardComponent = () => {
                 )}
               </Button>
             </div>
-            {/* <Badge variant="secondary" className="bg-green-100 text-green-800">
-              AI Powered
-            </Badge> */}
-          </div>
+            div>
         </div>
       </div>
 
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-0 py-8">
         {/* Video Information Section */}
-        <VideoInfo analysis={analysis}videoData={videoData} transcript={transcript} videoUrl={videoData?.videoUrl ?? undefined} />
+        <VideoInfo videoData={vanalysis={analysis} ideoData} transcript={transcript} videoUrl={videoData?.videoUrl ?? undefined} />
 
         {/* Analysis Results Section */}
         <div className="flex items-center justify-between mb-6">
@@ -212,7 +158,7 @@ const DashboardComponent = () => {
             </Badge>
           )}
         </div>
-        <AnalysisResults analysis={analysis} isLoading={isAnalyzing} />
+        <AnalysisResults analysis={analysis} isanalysis{isAnalyzing} />
       </div>
     </div>
   );

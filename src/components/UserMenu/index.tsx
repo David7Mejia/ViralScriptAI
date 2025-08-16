@@ -35,11 +35,9 @@ const UserMenu = ({ session }: UserMenuProps) => {
             <CircleUserRound className="cursor-pointer" color={"white"} strokeWidth={1.25} absoluteStrokeWidth onClick={() => setToggleDropdown(prev => !prev)} />
             {toggleDropdown && (
               <div className="dropdown" ref={dropdownRef}>
-                <Link href="/my-rooms" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
-                  My Rooms
-                </Link>
-                <Link href="/generate" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
-                  Create Rooms
+              
+                <Link href="/apis" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
+                  API Keys
                 </Link>
                 <Link type="button" href="/auth/logout" className="dropdown_link black_btn" onClick={() => setToggleDropdown(false)}>
                   Logout

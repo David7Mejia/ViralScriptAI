@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       likes: typeof data.authorMeta?.heart === "number" ? data.authorMeta.heart : null,
       videoCount: typeof data.authorMeta?.video === "number" ? data.authorMeta.video : null,
       platformUrl: typeof data.authorMeta?.profileUrl === "string" ? data.authorMeta.profileUrl : null,
-      downloadUrls: data?.mediaUrls[0] ?? null,
+      downloadUrls: data?.mediaUrls?.[0] ?? null,
       videoLikes: typeof data.diggCount === "number" ? data.diggCount : null,
       videoShares: typeof data.shareCount === "number" ? data.shareCount : null,
       videoPlays: typeof data.playCount === "number" ? data.playCount : null,

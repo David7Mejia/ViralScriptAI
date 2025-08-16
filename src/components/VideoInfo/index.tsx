@@ -3,7 +3,6 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Heart, Share, MessageCircle, Bookmark, Play, Pause, Volume2, VolumeX, Maximize, Users, Clock, CheckCircle, MapPin, Calendar, Music } from "lucide-react";
 import type { ApifyData, TikTokApiResponse } from "../../types/apify";
-import type { JSX } from "react";
 import { useState } from "react";
 import CreatorStats from "../CreatorStats";
 import { ColorMetric } from "@/types/analysis";
@@ -16,12 +15,10 @@ interface VideoInfoProps {
 }
 
 const VideoInfo = ({ videoData, transcript, videoUrl }: VideoInfoProps) => {
-  // If array, use first item; else use object; fallback to empty object
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
   const data: any = Array.isArray(videoData) ? videoData[0] : videoData || {};
-  // const [transcript, setTranscript] = useState<string>("");
 
   const formatNumber = (num?: number): string => {
     if (!num && num !== 0) return "0";
@@ -59,11 +56,6 @@ const VideoInfo = ({ videoData, transcript, videoUrl }: VideoInfoProps) => {
     { icon: Share, metric: data.videoShares || 0, label: "Shares", color: "bg-purple-50", text: "text-purple-600", metricColor: "text-purple-700" },
     { icon: Bookmark, metric: data.videoSaves || 0, label: "Saves", color: "bg-orange-50", text: "text-orange-600", metricColor: "text-orange-700" },
   ];
-  const calculateEngagementRate = (): string => {
-    const totalEngagements = (data.videoLikes || 0) + (data.videoComments || 0) + (data.videoShares || 0);
-    const rate = data.videoPlays ? (totalEngagements / data.videoPlays) * 100 : 0;
-    return rate.toFixed(1) + "%";
-  };
 
   return (
     <div className="space-y-6">
@@ -72,43 +64,7 @@ const VideoInfo = ({ videoData, transcript, videoUrl }: VideoInfoProps) => {
 
       {/* Video Preview Card */}
       <div id="video-info-container" className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* <div id="video-col" className="p-6 rounded-xl shadow-sm bg-white">
-          <div className="flex items-start justify-between">
-            <div id="video-cover-container" className="glow-aura flex-1 h-full">
-              <img id="video-cover" src={data.thumbnailUrl || "/placeholder.svg"} alt="Video cover" className="max-w-mdobject-cover rounded-lg" />
-            </div> */}
 
-        {/* Video Metrics */}
-
-        {/* <div className="flex-1">
-              <div className="flex flex-col max-w-30 gap-y-3 ml-auto">
-                {colorMetrics.map((item: ColorMetric, index) => (
-                  <div key={index} className={`${item.color} rounded-lg p-3 text-center`}>
-                    <div className={`flex items-center justify-center space-x-1 ${item.text} mb-1`}>
-                      <item.icon className="w-4 h-4" />
-                      <span className="text-xs font-medium">{item.label}</span>
-                    </div>
-                    <p className={`font-bold text-lg ${item.metricColor}`}>{formatNumber(item.metric)}</p>
-                  </div>
-                ))}
-              </div>
-            </div> */}
-        {/* </div>
-          <div> */}
-
-        {/* <h3 id="video-caption" className="font-semibold text-lg my-2 text-white">
-              {data.caption}
-            </h3> */}
-        {/* <div className="flex items-center space-x-4 text-sm text-white">
-              <div className="flex items-center space-x-1">
-                <Clock className="w-4 h-4" />
-                <span className="text-xs text-gray-700">{formatDuration(data.duration ?? 0)}</span>
-              </div> */}
-        {/* TikTokApiResponse does not have locationCreated or musicMeta, so omit those */}
-        {/* <div className="text-xs text-gray-700">Posted {formatDate(data.createdAt ?? undefined)}</div>
-            </div>
-          </div>
-        </div> */}
         <Card className="shadow-sm">
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -183,9 +139,7 @@ const VideoInfo = ({ videoData, transcript, videoUrl }: VideoInfoProps) => {
                         <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2" onClick={() => setIsMuted(!isMuted)}>
                           {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                         </Button>
-                        {/* <Button size="sm" variant="ghost" className="text-white hover:bg-white/20 p-2">
-                          <Maximize className="w-4 h-4" />
-                        </Button> */}
+
                       </div>
                     </div>
                   </div>
@@ -224,7 +178,6 @@ const VideoInfo = ({ videoData, transcript, videoUrl }: VideoInfoProps) => {
         </Card>
 
         <div className="space-y-6">
-          {/* TRANSCRIPT INFO SHOLD GO HERE  */}
           <TranscriptInfo transcript={transcript} />
         </div>
       </div>

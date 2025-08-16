@@ -39,31 +39,8 @@ const SummaryCard = ({ title, content, icon: Icon, color }) => (
   </div>
 );
 
-const AnalysisSection = ({ icon: Icon, title, content, color, bgColor }: AnalysisSectionProps) => (
-  <div className={`p-4 rounded-lg ${bgColor} border-l-4 ${color.includes("border-l-") ? color : "border-l-" + color}`}>
-    <div className="flex items-center mb-2">
-      <Icon className={`w-5 h-5 mr-2 ${color.includes("text-") ? color.split(" ").find(c => c.startsWith("text-")) : ""}`} />
-      <h4 className="font-semibold text-gray-800">{title}</h4>
-    </div>
-    <p className="text-sm text-gray-600 leading-relaxed">{content || "Analysis not available for this section."}</p>
-  </div>
-);
-let analysis = {
-  sentiment: "positive",
-  structure: {
-    hook: "The best business to start is one where people don't stop paying.",
-    problem: "Identifying what people continue to pay for regularly.",
-    story: "Analyzing personal spending habits reveals consistent payments such as rent, internet, and insurance, which contributes to the longevity and stability of these sectors.",
-    payoff: "Industries with consistent income sources have proven to be sustainable and resilient over time.",
-    cta: "Look at your own bills to identify opportunities for business ventures.",
-  },
-  topics: ["business ideas", "finance", "sustainability", "real estate", "consumer behavior", "investments"],
-  keywords: ["business", "payments", "credit card bill", "real estate", "insurance", "internet bill", "opportunity", "long lasting institutions"],
-  summary:
-    "The transcript emphasizes the importance of starting a business in sectors where consumers have ongoing payment obligations, highlighting that these industries are resilient and profitable due to their necessity in people's lives.",
-};
-const AnalysisResults = ({ isLoading }: AnalysisResultsProps) => {
-  // Debug logging to see what data we're getting
+
+const AnalysisResults = ({ analysis, isLoading }: AnalysisResultsProps) => {
 
   return (
     <>

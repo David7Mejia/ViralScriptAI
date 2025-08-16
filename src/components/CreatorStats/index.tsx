@@ -2,7 +2,6 @@
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import { Users, Heart, Play, CheckCircle } from "lucide-react";
 import { MetricItem } from "@/types/analysis";
-
 import type { TikTokApiResponse } from "@/types/apify";
 
 interface CreatorStatsProps {
@@ -17,7 +16,6 @@ const CreatorStats = ({ videoData, formatNumber }: CreatorStatsProps) => {
     { icon: Play, color: "text-blue-50", metric: videoData?.videoCount || 0, label: "Videos" },
     { icon: Users, color: "text-green-50", metric: videoData?.following || 0, label: "Following" },
 
-    // TikTokApiResponse does not have following count, so omit or add if available
   ];
 
   return (
@@ -31,7 +29,6 @@ const CreatorStats = ({ videoData, formatNumber }: CreatorStatsProps) => {
             <section id="subheading">
               <div className="flex items-center space-x-2 mb-1">
                 <p className="text-black font-bold text-xl">@{videoData?.name || videoData?.username}</p>
-                {/* TikTokApiResponse does not have verified, so omit or add if available */}
               </div>
               <div className="flex items-center space-x-2 mb-1">
                 <h3 className="text-md">{videoData?.username}</h3>
