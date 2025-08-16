@@ -1,16 +1,18 @@
 import React from "react";
 
-export type AnalysisResult = {
-  visualElements: string;
-  hook: string;
-  context: string;
-  storytelling: string;
-  cta: string;
-  factCheck: string;
-  engagement_factors?: string[];
-  sentiment?: string;
-  tone?: string;
-};
+export interface AnalysisResult {
+  sentiment: "positive" | "neutral" | "negative"; // Sentiment is a string with specific values
+  structure: {
+    hook: string;
+    problem: string;
+    story: string;
+    payoff: string;
+    cta: string;
+  };
+  topics: string[]; // Array of strings for topics
+  keywords: string[]; // Array of strings for keywords
+  summary: string; // Summary is a string
+}
 
 export type AnalysisItem = {
   key: keyof AnalysisResult;

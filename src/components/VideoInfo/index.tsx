@@ -15,7 +15,7 @@ interface VideoInfoProps {
   videoUrl?: string;
 }
 
-function VideoInfo({ videoData, transcript, videoUrl }: VideoInfoProps): JSX.Element {
+const VideoInfo = ({ videoData, transcript, videoUrl }: VideoInfoProps) => {
   // If array, use first item; else use object; fallback to empty object
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);

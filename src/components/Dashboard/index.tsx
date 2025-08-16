@@ -46,9 +46,10 @@ const DashboardComponent = () => {
         body: JSON.stringify({ url }),
       });
       const { response: tiktokData } = await response.json();
+      console.log("GET VIDEO??>>>>>>>>", response);
       // If array, use first item; else use object
       const videoObj = Array.isArray(tiktokData) ? tiktokData[0] : tiktokData;
-
+      console.log("video obj", videoObj, tiktokData);
       if (response.ok && videoObj) {
         setVideoData(videoObj);
 
@@ -61,8 +62,8 @@ const DashboardComponent = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              publicUrl: videoObj.videoUrl,
-              prompt: "Analyze this video and return STRICT JSON with { visualElements, hook, context, cta } and MM:SS timestamps.",
+              publicUrl: videoObj?.videoUrl,
+              tiktokData: videoObj,
             }),
           });
 
@@ -74,27 +75,49 @@ const DashboardComponent = () => {
             setStep("error");
             throw new Error(analysisResponse.error || "Failed to analyze video");
           }
+          // ---- STREAM HANDLING ----
+          setStep("streaming");
+          let accumulatedPartials: any[] = [];
+          let accumulatedTranscript = "";
 
-          // Update state with analysis and transcript
-          const { analysis, transcript } = analysisResponse;
-          console.log("analysis transcript", analysis, transcript);
-          setAnalysis(analysis);
-          setTranscript(transcript);
+          console.log("🔄 [Dashboard] Starting to receive stream from analysis endpoint...");
+
+          for await (const uiMessage of readUIMessageStream({
+            stream: result.body,
+          })) {
+            console.log("✅ [Dashboard] Received uiMessage:", uiMessage);
+
+            if (uiMessage.type === "text") {
+              accumulatedTranscript += uiMessage.text ?? "";
+              setTranscript(accumulatedTranscript); // Update transcript in real-time
+            } else if (uiMessage.type === "partial") {
+              accumulatedPartials.push(uiMessage.partial);
+              setAnalysis([...accumulatedPartials]); // Update analysis in real-time
+            }
+          }
+
+          console.log("✅ [Dashboard] Stream processing complete");
           setStep("complete");
+          {
+            /*
+
+          }
+          // const { partials, transcript } = analysisResponse;
+          // console.log("analysis transcript", partials, transcript);
+          // setAnalysis(partials);
+          // setTranscript(transcript);
+          // setStep("complete");
+
+          */
+          }
         } catch (e) {
           console.error("Error analyzing video:", e);
           setTranscript("");
           setAnalysis(null);
           setStep("error");
         }
-        /*
-        try {
-          setStep("upload");
-          const uploadToSupabase = await fetch("/api/upload", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(videoObj),
-          });
+        {
+          /*
 
           if (!uploadToSupabase.ok) {
             const errorData = await uploadToSupabase.json();
@@ -123,117 +146,8 @@ const DashboardComponent = () => {
                 setStep("error");
                 throw new Error(analysisResponse.error || "Failed to analyze video");
               }
-
-              // ---- STREAM (docs-style parts.forEach) ----
-              setStep("streaming");
-              let acc = "";
-              console.log("🔄 [Dashboard] Starting to receive stream from analysis endpoint...");
-
-              try {
-                const stream = result.body as unknown as ReadableStream<any>; // satisfy TS for readUIMessageStream
-                console.log("📥 [Dashboard] Stream object received:", !!stream);
-
-                if (!stream) {
-                  throw new Error("No stream returned from API");
-                }
-
-                console.log("📡 [Dashboard] Starting readUIMessageStream...");
-
-                // @ts-ignore - body is a byte stream; runtime decoding is handled internally
-                for await (const uiMessage of readUIMessageStream({ stream })) {
-                  console.log("✅ [Dashboard] Received uiMessage:", uiMessage);
-
-                  if (!uiMessage.parts || !Array.isArray(uiMessage.parts)) {
-                    console.warn("⚠️ [Dashboard] Message has no parts array:", uiMessage);
-                    continue;
-                  }
-
-                  console.log(`📊 [Dashboard] Processing ${uiMessage.parts.length} parts in message`);
-
-                  uiMessage.parts.forEach((part: any, index: number) => {
-                    console.log(`📦 [Dashboard] Processing part ${index} of type ${part.type}`);
-
-                    switch (part.type) {
-                      case "text": {
-                        console.log(`📝 [Dashboard] Text part received (${part.text?.length || 0} chars):`, part.text?.substring(0, 100));
-                        acc += part.text ?? "";
-                        setTranscript(acc); // live preview
-                        break;
-                      }
-                      case "tool-call": {
-                        console.log("🔧 [Dashboard] Tool called:", part.toolName, "with args:", part.args);
-                        break;
-                      }
-                      case "tool-result": {
-                        console.log("🔧 [Dashboard] Tool result:", part.result);
-                        break;
-                      }
-                      default:
-                        console.log("❓ [Dashboard] Unknown part type:", part.type);
-                        break;
-                    }
-                  });
-
-                  console.log("📋 [Dashboard] Current accumulated text:", acc.substring(0, 100) + (acc.length > 100 ? "..." : ""));
-                }
-
-                console.log("✅ [Dashboard] Stream processing complete");
-              } catch (streamError) {
-                console.error("❌ [Dashboard] Error processing stream:", streamError);
-                setTranscript("Error processing response stream: " + String(streamError));
-              }
-
-              try {
-                console.log("🧩 [Dashboard] Stream complete, attempting to parse JSON");
-                console.log("📄 [Dashboard] Raw accumulated text:", acc);
-
-                if (!acc || acc.trim() === "") {
-                  console.error("❌ [Dashboard] Empty response from stream");
-                  setTranscript("Received empty response from analysis API");
-                  setStep("error");
-                  return;
-                }
-
-                // Try to find JSON in the text (in case there's any text wrapper)
-                let jsonText = acc;
-                const jsonStartPos = acc.indexOf("{");
-                const jsonEndPos = acc.lastIndexOf("}");
-
-                if (jsonStartPos > -1 && jsonEndPos > -1 && jsonEndPos > jsonStartPos) {
-                  jsonText = acc.substring(jsonStartPos, jsonEndPos + 1);
-                  console.log("🔍 [Dashboard] Extracted potential JSON:", jsonText);
-                }
-
-                const parsed = JSON.parse(jsonText);
-                console.log("✅ [Dashboard] Successfully parsed JSON:", parsed);
-                setAnalysis(parsed);
-                setTranscript("");
-                setStep("complete");
-              } catch (parseError) {
-                console.error("❌ [Dashboard] Failed to parse analysis response as JSON:", parseError);
-                console.log("📄 [Dashboard] Raw response:", acc);
-                setAnalysis(null);
-                setTranscript(acc); // Show the raw text since we couldn't parse JSON
-                console.warn("⚠️ [Dashboard] Analysis was not valid JSON. Showing raw text in transcript.");
-                setStep("complete");
-              }
-            } catch (e) {
-              console.error("Error analyzing video:", e);
-              setTranscript("");
-              setAnalysis(null);
-              setStep("error");
-            }
-            // -------------------------------------------------------------------------
-          }
-        } catch (uploadError) {
-          console.error("Error uploading to Supabase:", uploadError);
-          setStep("error");
+        */
         }
-*/
-        // (Old commented code preserved)
-        // const { transcript, analysis } = await analysisResponse.json();
-        // setTranscript(transcript);
-        // setAnalysis(analysis);
       } else {
         console.error("❌ [Dashboard] Failed to fetch video data:", response.statusText);
         setTranscript("");
@@ -288,7 +202,7 @@ const DashboardComponent = () => {
 
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-0 py-8">
         {/* Video Information Section */}
-        <VideoInfo videoData={videoData} transcript={transcript} videoUrl={videoData?.videoUrl ?? undefined} />
+        <VideoInfo analysis={analysis}videoData={videoData} transcript={transcript} videoUrl={videoData?.videoUrl ?? undefined} />
 
         {/* Analysis Results Section */}
         <div className="flex items-center justify-between mb-6">
