@@ -12,13 +12,13 @@ interface AnalysisSectionProps {
   icon: React.ElementType;
   title?: string;
   content?: string;
-  color?: string;
+  color: string;
   bgColor?: string;
 }
-const StructureSection = ({ icon: Icon, title, content, color, bgColor }: AnalysisSectionProps) => (
+const StructureSection = ({ icon: Icon, title, content, color = "text-gray-500", bgColor = "bg-gray-50" }: AnalysisSectionProps) => (
   <div className={`p-4 rounded-xl ${bgColor} border border-gray-100 hover:shadow-sm transition-all duration-200`}>
     <div className="flex items-start space-x-3">
-      <div className={`p-2 rounded-lg ${bgColor} border ${color.replace("text-", "border-")}`}>
+      <div className={`p-2 rounded-lg ${bgColor} border ${color?.replace("text-", "border-")}`}>
         <Icon className={`w-4 h-4 ${color}`} />
       </div>
       <div className="flex-1 min-w-0">

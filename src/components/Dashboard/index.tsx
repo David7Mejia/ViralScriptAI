@@ -13,7 +13,7 @@ import type { AnalysisResult, AnalysisItem } from "../../types/analysis";
 import type { TikTokApiResponse } from "../../types/apify";
 import { AnalysisSchema } from "@/types/analysis";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
-
+import ProgressModal from "../ProgressModal";
 const DashboardComponent = () => {
   const [url, setUrl] = useState<string>("");
   const [transcript, setTranscript] = useState<string>("");
@@ -21,10 +21,29 @@ const DashboardComponent = () => {
   const [videoData, setVideoData] = useState<TikTokApiResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
-  const [step, setStep] = useState<"get-video" | "upload" | "analyze" | "streaming" | "complete" | "error" | "idle">("idle");
+  const [step, setStep] = useState<"get-video" | "upload" | "transcript" | "analyze" | "streaming" | "complete" | "error" | "idle">("idle");
   const [uploadResponse, setUploadResponse] = useState<{ videoUrl?: string }>({});
+  const [showProgress, setShowProgress] = useState(false);
 
-  // @ts-ignore
+  useEffect(() => {
+    // show for all non-idle states except when explicitly closed or on error
+    if (step === "idle") return setShowProgress(false);
+
+    if (step === "complete") {
+      setShowProgress(true);
+      const t = setTimeout(() => setShowProgress(false), 1500); // close after ~1.5s
+      return () => clearTimeout(t);
+    }
+
+    if (step === "error") {
+      setShowProgress(true); // allow user to see error and close manually
+      return;
+    }
+
+    setShowProgress(true);
+  }, [step]);
+
+  // @ts-ignore - Complex type resolution for useObject
   const {
     object,
     submit,
@@ -73,9 +92,10 @@ const DashboardComponent = () => {
 
         // Get transcript
         let tx = "";
-        console.log("Sending to analyze API:", JSON.stringify(videoObj)); // keeping your original log
+        console.log("Sending to analyze API:", JSON.stringify(videoObj));
         try {
-          console.log("🔄 [Dashboard] Requesting transcript...");
+          console.log("[Dashboard] Requesting transcript...");
+          setStep("transcript");
           const trRes = await fetch("/api/transcript", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -83,13 +103,13 @@ const DashboardComponent = () => {
           });
           const trJson = await trRes.json();
           if (!trRes.ok) {
-            console.error("❌ [Dashboard] Transcript API error:", trJson);
+            console.error("[Dashboard] Transcript API error:", trJson);
             setStep("error");
             setIsAnalyzing(false);
             return; // stop — analysis requires the transcript
           }
           tx = trJson.transcript ?? "";
-          console.log("✅ [Dashboard] Transcript received, length:", tx.length);
+          console.log("[Dashboard] Transcript received, length:", tx.length);
           setTranscript(tx);
         } catch (e) {
           console.error("[Dashboard] Transcript fetch failed:", e);
@@ -101,16 +121,14 @@ const DashboardComponent = () => {
         try {
           setStep("analyze");
 
-          // start the streaming request using useObject.submit
           setStep("streaming");
           console.log("[Dashboard] Starting to stream analysis object via useObject.submit...");
           await submit({
             publicUrl: videoObj?.videoUrl,
             tiktokData: videoObj,
-            transcript: tx, // <-- pass the transcript to the backend
+            transcript: tx,
           });
 
-          // When the stream completes, useObject stops updating `object`
           console.log("[Dashboard] Object stream complete");
           if (!streamError) {
             setStep("complete");
@@ -181,6 +199,15 @@ const DashboardComponent = () => {
         </div>
         <AnalysisResults analysis={analysis} isLoading={isAnalyzing} />
       </div>
+      <ProgressModal
+        open={showProgress}
+        step={step}
+        onClose={() => {
+          // if user closes early, put UI back to idle-ish state (optional)
+          setShowProgress(false);
+          if (step !== "complete") setStep("idle");
+        }}
+      />
     </div>
   );
 };
