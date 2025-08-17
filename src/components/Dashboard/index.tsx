@@ -163,7 +163,7 @@ const DashboardComponent = () => {
   };
 
   return (
-    <div className="pt-[60.8px] px-5 min-h-screen w-full">
+    <div className="pt-[60.8px] px-20 min-h-screen w-full">
       {/* Header */}
       <div className="sticky top-[60px] z-50">
         <div id="search" className="px-6 sticky max-w-full mx-auto px-4 sm:px-6 lg:px-0">
