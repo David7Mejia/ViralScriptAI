@@ -208,6 +208,7 @@ The last 2 sections show the #topics and keywords that are relevant to the video
 - > In the .env.local file paste in your API keys/Token
 APIFY_TOKEN=
 OPENAI_API_KEY=
-
+- > run `npm run dev` in the main directory
+  
 - > Video used
 https://www.tiktok.com/@ahormozi/video/7538931351525838135
